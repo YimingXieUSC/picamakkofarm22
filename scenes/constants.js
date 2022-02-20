@@ -1,12 +1,9 @@
 /** Constants **/
-const WALKING_SPEED = 30;
+const WALKING_SPEED = 35;
 const RUNNING_SPEED = 70;
-const SCREEN_LEFT = 0;
 const SCREEN_RIGHT = 640;
-const SCREEN_TOP = 0;
 const SCREEN_BOTTOM = 370;
-const MAIN_CHARACTER_SCALE = 1.5;
-const MAIN_CHARACTER_SIZE = 16;
+const MAIN_CHARACTER_SCALE = 1.2;
 const allDirections = ['down', 'up', 'left', 'right'];
 
 /** Useful Classes **/

@@ -12,12 +12,9 @@ var GameEntryScene = new Phaser.Class({
     
     },
     onObjectClicked() {
-        console.log("Object clicked");
-
         this.scene.start("BeginGameScene", {
             "message": "Game over"
         });
-    
     },
     create: function() {
         // begin scene background
