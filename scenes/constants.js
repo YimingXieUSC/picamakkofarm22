@@ -27,6 +27,11 @@ var direction = 0;
 /** Reused Functions **/
 function preloadAnimation(scene) {
     scene.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
+    scene.load.spritesheet('normal_trees', 'assets/objects/Tree_animations/tree_sprites.png', { frameWidth: 48 });
+    scene.load.spritesheet('pear_trees', 'assets/objects/Tree_animations/tree_pear_sprites.png', { frameWidth: 48 });
+    scene.load.spritesheet('orange_trees', 'assets/objects/Tree_animations/tree_orange_sprites.png', { frameWidth: 48 });
+    scene.load.spritesheet('apple_trees', 'assets/objects/Tree_animations/tree_apple_sprites.png', { frameWidth: 48 });
+    scene.load.spritesheet('peach_trees', 'assets/objects/Tree_animations/tree_peach_sprites.png', { frameWidth: 48 });
 }
 
 function createAnimation(scene) {
@@ -171,6 +176,145 @@ function createAnimation(scene) {
         frameRate: 8,
     });
     /** End of Main Characrer Animation Set **/
+    /** Start of Normal Tree Animation Set **/
+    scene.anims.create({
+        key: 'normal_tree_static',
+        frames: scene.anims.generateFrameNumbers('normal_trees', { frames: [ 0 ] }),
+        frameRate: 1,
+    });
+    scene.anims.create({
+        key: 'normal_tree_moving',
+        frames: scene.anims.generateFrameNumbers('normal_trees', { frames: [ 12, 13, 14, 15 ] }),
+        frameRate: 4,
+        repeat: -1,
+    });
+    scene.anims.create({
+        key: 'normal_tree_chopped',
+        frames: scene.anims.generateFrameNumbers('normal_trees', { frames: [ 24, 25, 26, 27, 28, 29 ] }),
+        frameRate: 6,
+    });
+    scene.anims.create({
+        key: 'normal_tree_chopped_heavily',
+        frames: scene.anims.generateFrameNumbers('normal_trees', { frames: [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47 ] }),
+        frameRate: 12,
+    });
+    /** End of Normal Tree Animation Set **/
+    /** Start of Peach Tree Animation Set **/
+    scene.anims.create({
+        key: 'peach_tree_static',
+        frames: scene.anims.generateFrameNumbers('peach_trees', { frames: [ 0 ] }),
+        frameRate: 1,
+    });
+    scene.anims.create({
+        key: 'peach_tree_moving',
+        frames: scene.anims.generateFrameNumbers('peach_trees', { frames: [ 12, 13, 14, 15 ] }),
+        frameRate: 4,
+        repeat: -1,
+    });
+    scene.anims.create({
+        key: 'peach_tree_chopped',
+        frames: scene.anims.generateFrameNumbers('peach_trees', { frames: [ 24, 25, 26, 27, 28, 29 ] }),
+        frameRate: 6,
+    });
+    scene.anims.create({
+        key: 'peach_tree_chopped_heavily',
+        frames: scene.anims.generateFrameNumbers('peach_trees', { frames: [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47 ] }),
+        frameRate: 12,
+    });
+    scene.anims.create({
+        key: 'peach_tree_moving_no_fruits',
+        frames: scene.anims.generateFrameNumbers('peach_trees', { frames: [ 48, 49 ] }),
+        frameRate: 2,
+        repeat: -1,
+    });
+    /** End of Peach Tree Animation Set **/
+    /** Start of Apple Tree Animation Set **/
+    scene.anims.create({
+        key: 'apple_tree_static',
+        frames: scene.anims.generateFrameNumbers('apple_trees', { frames: [ 0 ] }),
+        frameRate: 1,
+    });
+    scene.anims.create({
+        key: 'apple_tree_moving',
+        frames: scene.anims.generateFrameNumbers('apple_trees', { frames: [ 12, 13, 14, 15 ] }),
+        frameRate: 4,
+        repeat: -1,
+    });
+    scene.anims.create({
+        key: 'apple_tree_chopped',
+        frames: scene.anims.generateFrameNumbers('apple_trees', { frames: [ 24, 25, 26, 27, 28, 29 ] }),
+        frameRate: 6,
+    });
+    scene.anims.create({
+        key: 'apple_tree_chopped_heavily',
+        frames: scene.anims.generateFrameNumbers('apple_trees', { frames: [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47 ] }),
+        frameRate: 12,
+    });
+    scene.anims.create({
+        key: 'apple_tree_moving_no_fruits',
+        frames: scene.anims.generateFrameNumbers('apple_trees', { frames: [ 48, 49 ] }),
+        frameRate: 2,
+        repeat: -1,
+    });
+    /** End of Apple Tree Animation Set **/
+    /** Start of Pear Tree Animation Set **/
+    scene.anims.create({
+        key: 'pear_tree_static',
+        frames: scene.anims.generateFrameNumbers('pear_trees', { frames: [ 0 ] }),
+        frameRate: 1,
+    });
+    scene.anims.create({
+        key: 'pear_tree_moving',
+        frames: scene.anims.generateFrameNumbers('pear_trees', { frames: [ 12, 13, 14, 15 ] }),
+        frameRate: 4,
+        repeat: -1,
+    });
+    scene.anims.create({
+        key: 'pear_tree_chopped',
+        frames: scene.anims.generateFrameNumbers('pear_trees', { frames: [ 24, 25, 26, 27, 28, 29 ] }),
+        frameRate: 6,
+    });
+    scene.anims.create({
+        key: 'pear_tree_chopped_heavily',
+        frames: scene.anims.generateFrameNumbers('pear_trees', { frames: [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47 ] }),
+        frameRate: 12,
+    });
+    scene.anims.create({
+        key: 'pear_tree_moving_no_fruits',
+        frames: scene.anims.generateFrameNumbers('pear_trees', { frames: [ 48, 49 ] }),
+        frameRate: 2,
+        repeat: -1,
+    });
+    /** End of Pear Tree Animation Set **/
+    /** Start of Orange Tree Animation Set **/
+    scene.anims.create({
+        key: 'orange_tree_static',
+        frames: scene.anims.generateFrameNumbers('orange_trees', { frames: [ 0 ] }),
+        frameRate: 1,
+    });
+    scene.anims.create({
+        key: 'orange_tree_moving',
+        frames: scene.anims.generateFrameNumbers('orange_trees', { frames: [ 12, 13, 14, 15 ] }),
+        frameRate: 4,
+        repeat: -1,
+    });
+    scene.anims.create({
+        key: 'orange_tree_chopped',
+        frames: scene.anims.generateFrameNumbers('orange_trees', { frames: [ 24, 25, 26, 27, 28, 29 ] }),
+        frameRate: 6,
+    });
+    scene.anims.create({
+        key: 'orange_tree_chopped_heavily',
+        frames: scene.anims.generateFrameNumbers('orange_trees', { frames: [ 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47 ] }),
+        frameRate: 12,
+    });
+    scene.anims.create({
+        key: 'orange_tree_moving_no_fruits',
+        frames: scene.anims.generateFrameNumbers('orange_trees', { frames: [ 48, 49 ] }),
+        frameRate: 2,
+        repeat: -1,
+    });
+    /** End of Pear Orange Animation Set **/
     /********************* End of Animation set *********************/
 }
 
@@ -185,10 +329,10 @@ function associateKeyboardInputs(scene)
     keyV = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
-function spawnMainCharacter(scene, x, y, anim)
+function spawnCharacter(scene, x, y, anim, scale)
 {
     cat = scene.add.sprite(x, y);
-    cat.setScale(MAIN_CHARACTER_SCALE);
+    cat.setScale(scale);
     cat.play(anim);
 }
 
