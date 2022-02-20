@@ -26,6 +26,12 @@ var BeginGameScene = new Phaser.Class({
     preload: function() {
         this.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
         this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit.png');
+
+
+        // map
+        this.load.image("hilled_dirt_tiles", "/assets/tilesets/Tilled_Dirt.png");
+        this.load.image("hilled_tiles", "/assets/tilesets/Hills.png");
+        this.load.tilemapCSV("map", "../assets/main_map_Tile_Layer_2.csv");
     },
     onObjectClicked() {
         console.log("Quitting the game");
@@ -35,6 +41,12 @@ var BeginGameScene = new Phaser.Class({
     
     },
     create: function() {
+
+        // map
+        const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
+        const tileset = map.addTilesetImage("hilled_dirt_tiles");
+        const layer = map.createStaticLayer(0, tileset, 0, 0); // layer index, tileset, x, y
+
         /********************* Start of Animation set *********************/
         /** Start of Main Characrer Animation Set **/
         // idle
