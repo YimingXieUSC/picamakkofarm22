@@ -31,6 +31,7 @@ var GameEntryScene = new Phaser.Class({
         this.sound.play('menu_music', {
             loop: true
         });
+        this.sound.pauseOnBlur = false;
 
         // begin scene text
         this.add
