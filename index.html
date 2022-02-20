@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
 </head>
 <body>
 
@@ -26,16 +26,18 @@
 
     function preload ()
     {
-        this.load.setBaseURL('http://labs.phaser.io');
-
-        this.load.image('sky', 'assets/skies/space3.png');
-        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'assets/particles/red.png');
+        // this.load.setBaseURL('http://labs.phaser.io');
+        console.log(window.location.pathname);
+        this.load.image('sky', 'http://labs.phaser.io/assets/skies/space3.png');
+        this.load.image('logo', 'http://labs.phaser.io/assets/sprites/phaser3-logo.png');
+        this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');
+        this.load.image('bomb', 'bomb.png');
     }
 
     function create ()
     {
         this.add.image(400, 300, 'sky');
+        this.add.image(400, 400, 'bomb');
 
         var particles = this.add.particles('red');
 
