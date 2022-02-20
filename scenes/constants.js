@@ -1,6 +1,6 @@
 /** Constants **/
-const WALKING_SPEED = 0.5;
-const RUNNING_SPEED = 1.2;
+const WALKING_SPEED = 0.8;
+const RUNNING_SPEED = 1.5;
 const SCREEN_LEFT = 0;
 const SCREEN_RIGHT = 640;
 const SCREEN_TOP = 0;
@@ -8,6 +8,24 @@ const SCREEN_BOTTOM = 370;
 const MAIN_CHARACTER_SCALE = 1.5;
 const MAIN_CHARACTER_SIZE = 16;
 const allDirections = ['down', 'up', 'left', 'right'];
+
+/** Useful Classes **/
+class AnimatedObject {
+    currentPlayingAnim;
+    character;
+    constructor(anim) {
+        this.currentPlayingAnim = anim;
+    }
+}
+class MainCharacter extends AnimatedObject {
+    disabledMoving = false;
+    running = false;
+    // direction: 0 (down), 1 (up), 2 (left), 3 (right)
+    direction = 0;
+    constructor() {
+        super('idle_down');
+    }
+}
 
 /** Global Variables **/
 var keyW;
@@ -17,12 +35,7 @@ var keyD;
 var keyX;
 var keyC;
 var keyV;
-var disabledMoving = false;
-var currentPlayingAnim = 'idle_down';
-var cat;
-var running = false;
-// direction: 0 (down), 1 (up), 2 (left), 3 (right)
-var direction = 0;
+const mainCharacter = new MainCharacter();
 
 /** Reused Functions **/
 function preloadAnimation(scene) {
@@ -329,157 +342,157 @@ function associateKeyboardInputs(scene)
     keyV = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
-function spawnMainCharacter(scene, x, y, anim)
+function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale)
 {
-    cat = scene.add.sprite(x, y);
-    cat.setScale(MAIN_CHARACTER_SCALE);
-    cat.play(anim);
+    animatedObj.character = scene.add.sprite(x, y);
+    animatedObj.character.setScale(scale);
+    animatedObj.character.play(anim);
+}
+
+function spawnMainCharacter(scene, x, y, anim, scale)
+{
+    mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
+    mainCharacter.character.setCollideWorldBounds(true);
+    mainCharacter.character.setScale(scale);
+    mainCharacter.character.play(anim);
 }
 
 function processInput()
 {
-    if (!disabledMoving) {
+    if (!mainCharacter.disabledMoving) {
         // check for tilling
         if (keyX.isDown) {
-            disabledMoving = true;
-            if (direction == 1) {
-                currentPlayingAnim = 'tilling_up';
-                cat.play('tilling_up');
-            } else if (direction == 0) {
-                currentPlayingAnim = 'tilling_down';
-                cat.play('tilling_down');
-            } else if (direction == 2) {
-                currentPlayingAnim = 'tilling_left';
-                cat.play('tilling_left');
-            } else if (direction == 3) {
-                currentPlayingAnim = 'tilling_right';
-                cat.play('tilling_right');
+            mainCharacter.disabledMoving = true;
+            if (mainCharacter.direction == 1) {
+                mainCharacter.currentPlayingAnim = 'tilling_up';
+                mainCharacter.character.play('tilling_up');
+            } else if (mainCharacter.direction == 0) {
+                mainCharacter.currentPlayingAnim = 'tilling_down';
+                mainCharacter.character.play('tilling_down');
+            } else if (mainCharacter.direction == 2) {
+                mainCharacter.currentPlayingAnim = 'tilling_left';
+                mainCharacter.character.play('tilling_left');
+            } else if (mainCharacter.direction == 3) {
+                mainCharacter.currentPlayingAnim = 'tilling_right';
+                mainCharacter.character.play('tilling_right');
             }
         } else if (keyC.isDown) {
-            disabledMoving = true;
-            if (currentPlayingAnim === 'run_up' ||
-                currentPlayingAnim === 'walk_up' ||
-                currentPlayingAnim === 'idle_up') {
-                currentPlayingAnim = 'chopping_up';
-                cat.play('chopping_up');
-            } else if (currentPlayingAnim === 'run_down' ||
-                currentPlayingAnim === 'walk_down' ||
-                currentPlayingAnim === 'idle_down') {
-                currentPlayingAnim = 'chopping_down';
-                cat.play('chopping_down');
-            } else if (currentPlayingAnim === 'run_left' ||
-                currentPlayingAnim === 'walk_left' ||
-                currentPlayingAnim === 'idle_left') {
-                currentPlayingAnim = 'chopping_left';
-                cat.play('chopping_left');
-            } else if (currentPlayingAnim === 'run_right' ||
-                currentPlayingAnim === 'walk_right' ||
-                currentPlayingAnim === 'idle_right') {
-                currentPlayingAnim = 'chopping_right';
-                cat.play('chopping_right');
+            mainCharacter.disabledMoving = true;
+            if (mainCharacter.direction == 1) {
+                mainCharacter.currentPlayingAnim = 'chopping_up';
+                mainCharacter.character.play('chopping_up');
+            } else if (mainCharacter.direction == 0) {
+                mainCharacter.currentPlayingAnim = 'chopping_down';
+                mainCharacter.character.play('chopping_down');
+            } else if (mainCharacter.direction == 2) {
+                mainCharacter.currentPlayingAnim = 'chopping_left';
+                mainCharacter.character.play('chopping_left');
+            } else if (mainCharacter.direction == 3) {
+                mainCharacter.currentPlayingAnim = 'chopping_right';
+                mainCharacter.character.play('chopping_right');
             }
         } else if (keyV.isDown) {
-            disabledMoving = true;
-            if (direction == 1) {
-                currentPlayingAnim = 'watering_up';
-                cat.play('watering_up');
-            } else if (direction == 0) {
-                currentPlayingAnim = 'watering_down';
-                cat.play('watering_down');
-            } else if (direction == 2) {
-                currentPlayingAnim = 'watering_left';
-                cat.play('watering_left');
-            } else if (direction == 3) {
-                currentPlayingAnim = 'watering_right';
-                cat.play('watering_right');
+            mainCharacter.disabledMoving = true;
+            if (mainCharacter.direction == 1) {
+                mainCharacter.currentPlayingAnim = 'watering_up';
+                mainCharacter.character.play('watering_up');
+            } else if (mainCharacter.direction == 0) {
+                mainCharacter.currentPlayingAnim = 'watering_down';
+                mainCharacter.character.play('watering_down');
+            } else if (mainCharacter.direction == 2) {
+                mainCharacter.currentPlayingAnim = 'watering_left';
+                mainCharacter.character.play('watering_left');
+            } else if (mainCharacter.direction == 3) {
+                mainCharacter.currentPlayingAnim = 'watering_right';
+                mainCharacter.character.play('watering_right');
             }
         } else if (keyW.isDown) {
-            direction = 1;
-            if (keyW.getDuration() > 1500 || running) {
-                running = true;
-                if (currentPlayingAnim !== 'run_up') {
-                    currentPlayingAnim = 'run_up';
-                    cat.play('run_up');
+            mainCharacter.direction = 1;
+            if (keyW.getDuration() > 1500 || mainCharacter.running) {
+                mainCharacter.running = true;
+                if (mainCharacter.currentPlayingAnim !== 'run_up') {
+                    mainCharacter.currentPlayingAnim = 'run_up';
+                    mainCharacter.character.play('run_up');
                 }
-                cat.y = Math.max(cat.y - RUNNING_SPEED,
+                mainCharacter.character.y = Math.max(mainCharacter.character.y - RUNNING_SPEED,
                     SCREEN_TOP + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             } else {
-                running = false;
-                if (currentPlayingAnim !== 'walk_up') {
-                    currentPlayingAnim = 'walk_up';
-                    cat.play('walk_up');
+                mainCharacter.running = false;
+                if (mainCharacter.currentPlayingAnim !== 'walk_up') {
+                    mainCharacter.currentPlayingAnim = 'walk_up';
+                    mainCharacter.character.play('walk_up');
                 }
-                cat.y = Math.max(cat.y - WALKING_SPEED,
+                mainCharacter.character.y = Math.max(mainCharacter.character.y - WALKING_SPEED,
                     SCREEN_TOP + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             }
         } else if (keyS.isDown) {
-            direction = 0;
-            if (keyS.getDuration() > 1500 || running) {
-                running = true;
-                if (currentPlayingAnim !== 'run_down') {
-                    currentPlayingAnim = 'run_down';
-                    cat.play('run_down');
+            mainCharacter.direction = 0;
+            if (keyS.getDuration() > 1500 || mainCharacter.running) {
+                mainCharacter.running = true;
+                if (mainCharacter.currentPlayingAnim !== 'run_down') {
+                    mainCharacter.currentPlayingAnim = 'run_down';
+                    mainCharacter.character.play('run_down');
                 }
-                cat.y = Math.min(cat.y + RUNNING_SPEED,
+                mainCharacter.character.y = Math.min(mainCharacter.character.y + RUNNING_SPEED,
                     SCREEN_BOTTOM - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             } else {
-                running = false;
-                if (currentPlayingAnim !== 'walk_down') {
-                    currentPlayingAnim = 'walk_down';
-                    cat.play('walk_down');
+                mainCharacter.running = false;
+                if (mainCharacter.currentPlayingAnim !== 'walk_down') {
+                    mainCharacter.currentPlayingAnim = 'walk_down';
+                    mainCharacter.character.play('walk_down');
                 }
-                cat.y = Math.min(cat.y + WALKING_SPEED,
+                mainCharacter.character.y = Math.min(mainCharacter.character.y + WALKING_SPEED,
                     SCREEN_BOTTOM - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             }
         } else if (keyA.isDown) {
-            direction = 2;
-            if (keyA.getDuration() > 1500 || running) {
-                running = true;
-                if (currentPlayingAnim !== 'run_left') {
-                    currentPlayingAnim = 'run_left';
-                    cat.play('run_left');
+            mainCharacter.direction = 2;
+            if (keyA.getDuration() > 1500 || mainCharacter.running) {
+                mainCharacter.running = true;
+                if (mainCharacter.currentPlayingAnim !== 'run_left') {
+                    mainCharacter.currentPlayingAnim = 'run_left';
+                    mainCharacter.character.play('run_left');
                 }
-                cat.x = Math.max(cat.x - RUNNING_SPEED,
+                mainCharacter.character.x = Math.max(mainCharacter.character.x - RUNNING_SPEED,
                     SCREEN_LEFT + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             } else {
-                running = false;
-                if (currentPlayingAnim !== 'walk_left') {
-                    currentPlayingAnim = 'walk_left';
-                    cat.play('walk_left');
+                mainCharacter.running = false;
+                if (mainCharacter.currentPlayingAnim !== 'walk_left') {
+                    mainCharacter.currentPlayingAnim = 'walk_left';
+                    mainCharacter.character.play('walk_left');
                 }
-                cat.x = Math.max(cat.x - WALKING_SPEED,
+                mainCharacter.character.x = Math.max(mainCharacter.character.x - WALKING_SPEED,
                     SCREEN_LEFT + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             }
         } else if (keyD.isDown) {
-            direction = 3;
-            if (keyD.getDuration() > 1500 || running) {
-                running = true;
-                if (currentPlayingAnim !== 'run_right') {
-                    currentPlayingAnim = 'run_right';
-                    cat.play('run_right');
+            mainCharacter.direction = 3;
+            if (keyD.getDuration() > 1500 || mainCharacter.running) {
+                mainCharacter.running = true;
+                if (mainCharacter.currentPlayingAnim !== 'run_right') {
+                    mainCharacter.currentPlayingAnim = 'run_right';
+                    mainCharacter.character.play('run_right');
                 }
-                cat.x = Math.min(cat.x + RUNNING_SPEED,
+                mainCharacter.character.x = Math.min(mainCharacter.character.x + RUNNING_SPEED,
                     SCREEN_RIGHT - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             } else {
-                running = false;
-                if (currentPlayingAnim !== 'walk_right') {
-                    currentPlayingAnim = 'walk_right';
-                    cat.play('walk_right');
+                mainCharacter.running = false;
+                if (mainCharacter.currentPlayingAnim !== 'walk_right') {
+                    mainCharacter.currentPlayingAnim = 'walk_right';
+                    mainCharacter.character.play('walk_right');
                 }
-                cat.x = Math.min(cat.x + WALKING_SPEED,
+                mainCharacter.character.x = Math.min(mainCharacter.character.x + WALKING_SPEED,
                     SCREEN_RIGHT - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
             }
         } else {
-            running = false;
-            if (direction <= 3 && direction >= 0 &&
-                currentPlayingAnim !== 'idle_' + allDirections[direction]) {
-                currentPlayingAnim = 'idle_'+ allDirections[direction];
-                cat.play(currentPlayingAnim);
+            mainCharacter.running = false;
+            if (mainCharacter.direction <= 3 && mainCharacter.direction >= 0 &&
+                mainCharacter.currentPlayingAnim !== 'idle_' + allDirections[mainCharacter.direction]) {
+                mainCharacter.currentPlayingAnim = 'idle_'+ allDirections[mainCharacter.direction];
+                mainCharacter.character.play(mainCharacter.currentPlayingAnim);
             }
         }
     }
-    else if (!cat.anims.isPlaying)
+    else if (!mainCharacter.character.anims.isPlaying)
     {
-        disabledMoving = false;
+        mainCharacter.disabledMoving = false;
     }
 }
