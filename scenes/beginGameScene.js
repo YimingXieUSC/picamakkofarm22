@@ -29,9 +29,11 @@ var BeginGameScene = new Phaser.Class({
 
 
         // map
-        this.load.image("hilled_dirt_tiles", "/assets/tilesets/Tilled_Dirt.png");
-        this.load.image("hilled_tiles", "/assets/tilesets/Hills.png");
-        this.load.tilemapCSV("map", "../assets/main_map_Tile_Layer1.csv");
+        // this.load.image("tiles", "/assets/tileset_collection.png");
+        // this.load.tilemapCSV("map2", "assets/tilemap_collection2_Tile_Layer_1.csv");
+        // this.load.tilemapCSV("map2", "assets/tilemap_collection2_Tile_Layer_2.csv");
+        this.load.image("tiles","assets/tilemap_collection.png");
+      this.load.tilemapTiledJSON('map',"assets/tilemap_collection2.json");
     },
     onObjectClicked() {
         console.log("Quitting the game");
@@ -42,10 +44,19 @@ var BeginGameScene = new Phaser.Class({
     },
     create: function() {
 
-        // map
-        const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
-        const tileset = map.addTilesetImage("hilled_tiles");
-        const layer = map.createStaticLayer(0, tileset, 0, 0); // layer index, tileset, x, y
+        // // map
+        // const map = this.make.tilemap({ key: "map2", tileWidth: 16, tileHeight: 16 });
+        // // const map_water = this.make.tilemap({ key: "map_water", tileWidth: 16, tileHeight: 16 });
+        // const tileset = map.addTilesetImage("tiles1", "tiles");
+        // // const tileset_water = map_water.addTilesetImage("water_tiles");
+        // const sea = map.createStaticLayer("ground", tileset, 0, 0); // layer index, tileset, x, y
+        // const ground = map.createStaticLayer("sea", tileset, 0, 0); // layer index, tileset, x, y
+        const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16});
+        const tileset = map.addTilesetImage("tiles1","tiles",16, 16, 1, 2);
+        const layer = map.createStaticLayer("ground", tileset, 0, 0);
+        const cactusLayer = map.createStaticLayer("sea", tileset, 0, 0);
+        const hillLayer = map.createStaticLayer("land", tileset, 0, 0);
+        // const layer_water = map.createStaticLayer(1, tileset_water, 0, 0); // layer index, tileset, x, y
 
         /********************* Start of Animation set *********************/
         /** Start of Main Characrer Animation Set **/
