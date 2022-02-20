@@ -7,8 +7,6 @@ var BeginGameScene = new Phaser.Class({
         this.message = data.message;
     },
     onObjectClicked() {
-        console.log("Object clicked");
-
         this.scene.start("GameEntryScene", {
             "message": "Start Over"
         });
