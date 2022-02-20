@@ -53,7 +53,7 @@ var BeginGameScene = new Phaser.Class({
         this.input.on('gameobjectdown', this.onObjectClicked, this);
         
         // add the main character
-        spawnCharacter(this, SCREEN_RIGHT / 2, SCREEN_BOTTOM / 2, 'idle_down', MAIN_CHARACTER_SCALE);
+        spawnMainCharacter(this, SCREEN_RIGHT / 2, SCREEN_BOTTOM / 2, 'idle_down');
     },
     update: function() {
         processInput();

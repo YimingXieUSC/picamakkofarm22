@@ -5,7 +5,7 @@ const SCREEN_LEFT = 0;
 const SCREEN_RIGHT = 640;
 const SCREEN_TOP = 0;
 const SCREEN_BOTTOM = 370;
-const MAIN_CHARACTER_SCALE = 1;
+const MAIN_CHARACTER_SCALE = 1.5;
 const MAIN_CHARACTER_SIZE = 16;
 const allDirections = ['down', 'up', 'left', 'right'];
 
@@ -329,10 +329,10 @@ function associateKeyboardInputs(scene)
     keyV = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
-function spawnCharacter(scene, x, y, anim, scale)
+function spawnMainCharacter(scene, x, y, anim)
 {
     cat = scene.add.sprite(x, y);
-    cat.setScale(scale);
+    cat.setScale(MAIN_CHARACTER_SCALE);
     cat.play(anim);
 }
 
