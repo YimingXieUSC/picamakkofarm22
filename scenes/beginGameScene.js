@@ -31,7 +31,7 @@ var BeginGameScene = new Phaser.Class({
         // map
         this.load.image("hilled_dirt_tiles", "/assets/tilesets/Tilled_Dirt.png");
         this.load.image("hilled_tiles", "/assets/tilesets/Hills.png");
-        this.load.tilemapCSV("map", "../assets/main_map_Tile_Layer_2.csv");
+        this.load.tilemapCSV("map", "../assets/main_map_Tile_Layer1.csv");
     },
     onObjectClicked() {
         console.log("Quitting the game");
@@ -44,7 +44,7 @@ var BeginGameScene = new Phaser.Class({
 
         // map
         const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
-        const tileset = map.addTilesetImage("hilled_dirt_tiles");
+        const tileset = map.addTilesetImage("hilled_tiles");
         const layer = map.createStaticLayer(0, tileset, 0, 0); // layer index, tileset, x, y
 
         /********************* Start of Animation set *********************/
@@ -211,7 +211,7 @@ var BeginGameScene = new Phaser.Class({
             SCREEN_BOTTOM / 2,
             "main game", 
             {
-                fontSize: 50,
+                fontSize: 25,
                 color: "#FFFFFF",
                 fontStyle: "bold"
             }
