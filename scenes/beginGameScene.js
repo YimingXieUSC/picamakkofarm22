@@ -202,23 +202,35 @@ var BeginGameScene = new Phaser.Class({
     update: function() {
         if (keyW.isDown)
         {
-            currentPlayingAnim = 'walk_up';
-            cat.play('walk_up');
+            if (currentPlayingAnim !== 'walk_up')
+            {
+                currentPlayingAnim = 'walk_up';
+                cat.play('walk_up');
+            }
         }
         else if (keyS.isDown)
         {
-            currentPlayingAnim = 'walk_down';
-            cat.play('walk_down');
+            if (currentPlayingAnim !== 'walk_down')
+            {
+                currentPlayingAnim = 'walk_down';
+                cat.play('walk_down');
+            }
         }
         else if (keyA.isDown)
         {
-            currentPlayingAnim = 'walk_left';
-            cat.play('walk_left');
+            if (currentPlayingAnim !== 'walk_left')
+            {
+                currentPlayingAnim = 'walk_left';
+                cat.play('walk_left');
+            }
         }
         else if (keyD.isDown)
         {
-            currentPlayingAnim = 'walk_right';
-            cat.play('walk_right');
+            if (currentPlayingAnim !== 'walk_right')
+            {
+                currentPlayingAnim = 'walk_right';
+                cat.play('walk_right');
+            }
         }
         else
         {
