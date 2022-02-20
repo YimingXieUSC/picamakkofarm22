@@ -4,6 +4,7 @@
         <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
         <script src="scenes/gameEntryScene.js"></script>
         <script src="scenes/beginGameScene.js"></script>
+        <script src="scenes/gameoverScene.js"></script>
     </head>
     <body>
         <div id="game"></div>
@@ -14,7 +15,7 @@
                 width: 1280,
                 height: 720,
                 backgroundColor: "#658CA1",
-                scene: [GameEntryScene, BeginGameScene]
+                scene: [GameOverScene, GameEntryScene, BeginGameScene]
             };
 
             const game = new Phaser.Game(phaserConfig);

@@ -6,8 +6,9 @@ var GameEntryScene = new Phaser.Class({
     init: function() {},
     preload: function() {
         this.load.image('farm_background', 'assets/beginPic.png');
-        this.load.image('house', 'assets/tilesets/Objects/Houses/1.png');
+        this.load.image('start_button', 'assets/ui/buttons/B_BT_Start.png');
         this.load.audio('menu_music', 'assets/bgm/menu.mp3');
+
     
     },
     onObjectClicked() {
@@ -44,7 +45,8 @@ var GameEntryScene = new Phaser.Class({
         // this.house = this.add.image(640, 360, "house");
 
         // button to the next scene
-        var playButton = this.add.image(640, 360, 'house').setDepth(1);
+        var playButton = this.add.image(640, 500, 'start_button').setDepth(1);
+        playButton.setScale(3);
 
         playButton.setInteractive();
 

@@ -8,6 +8,14 @@ var BeginGameScene = new Phaser.Class({
     },
     preload: function() {
         this.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
+        this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit.png');
+    },
+    onObjectClicked() {
+        console.log("Quitting the game");
+        this.scene.start("GameOverScene", {
+            "message": "Game over"
+        });
+    
     },
     create: function() {
         /********************* Start of Animation set *********************/
@@ -175,7 +183,7 @@ var BeginGameScene = new Phaser.Class({
         var text = this.add.text(
             640, 
             360, 
-            this.message, 
+            "main game", 
             {
                 fontSize: 50,
                 color: "#FFFFFF",
@@ -183,9 +191,18 @@ var BeginGameScene = new Phaser.Class({
             }
         ).setOrigin(0.5);
 
+        // button to quit the game
+        var playButton = this.add.image(1200, 40, 'quit_button').setDepth(1);
+        playButton.setScale(3);
+
+        playButton.setInteractive();
+
+        this.input.on('gameobjectdown', this.onObjectClicked, this);
+
+
         const cat = this.add.sprite(640, 360);
         cat.setScale(3);
-        cat.play('idle_down');
+        cat.play('run_up');
     },
     update: function() {}
 });
