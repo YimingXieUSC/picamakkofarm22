@@ -46,7 +46,7 @@ var GameEntryScene = new Phaser.Class({
         // this.house = this.add.image(640, 360, "house");
 
         // button to the next scene
-        var playButton = this.add.image(640, 500, 'start_button').setDepth(1);
+        var playButton = this.add.image(SCREEN_RIGHT / 2, SCREEN_BOTTOM * 3 / 4, 'start_button').setDepth(1);
         playButton.setScale(3);
 
         playButton.setInteractive();
