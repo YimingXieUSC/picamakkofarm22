@@ -49,8 +49,8 @@ var GameOverScene = new Phaser.Class({
         const layer = map.createStaticLayer(0, tileset, 0, 0); // layer index, tileset, x, y
 
         var text = this.add.text(
-            640, 
-            360, 
+            SCREEN_RIGHT / 2,
+            SCREEN_BOTTOM / 2,
             this.message, 
             {
                 fontSize: 50,
