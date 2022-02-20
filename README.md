@@ -16,6 +16,9 @@ The team members are：
 Before starting the game, please make sure you have installed node.js and have canva enabled on your browser.  
 To start the game, first run `node index.js` and then go to `http://127.0.0.1:8125/`.
 
+## Demo
+Check out the demo on [YouTube](https://youtu.be/CTSidrK51-o).
+
 Enjoy!
 
 
