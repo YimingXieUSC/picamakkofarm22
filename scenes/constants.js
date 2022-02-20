@@ -512,10 +512,11 @@ function processInput(scene)
             }
             if(mainCharacter.character.y < 118 && mainCharacter.character.y > 100 &&
                 mainCharacter.character.x < 389 && mainCharacter.character.x > 358){
-                    scene.scene.start("HomeScene", {
-                        "message": "Go back home"
-                    });
-                }
+                scene.sound.get('menu_music').stop();
+                scene.scene.start("HomeScene", {
+                    "message": "Go back home"
+                });
+            }
         } else if (keyS.isDown) {
             mainCharacter.direction = 0;
             if (keyS.getDuration() > 1500 || mainCharacter.running) {
@@ -535,22 +536,25 @@ function processInput(scene)
             }
             if(mainCharacter.character.x > 258 && mainCharacter.character.x < 266  && mainCharacter.character.y > 353){
                 console.log("Go to region down");
+                scene.sound.get('menu_music').stop();
                 scene.scene.start("GameOverScene", {
                     "message": "Game over"
                 });
             }
             if(mainCharacter.character.x > 400  && mainCharacter.character.y > 353){
                 console.log("Go to region right");
+                scene.sound.get('menu_music').stop();
                 scene.scene.start("GameOverScene", {
                         "message": "Game over"
             });
             }
-            console.log(mainCharacter.character.x, mainCharacter.character.y); 
             if(mainCharacter.character.y > 360 &&  mainCharacter.character.x > 320 && mainCharacter.character.x < 324){
+                scene.sound.play('menu_music', {
+                    loop: true
+                });
                 scene.scene.start("BeginGameScene", {
                     "message": "Go back to farm"
                 });
-                console.log(mainCharacter.character.x, mainCharacter.character.y);
             }
         } else if (keyA.isDown) {
             mainCharacter.direction = 2;
