@@ -63,6 +63,7 @@ var BeginGameScene = new Phaser.Class({
             faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
 
+        
         createAnimation(this);
         associateKeyboardInputs(this);
 

@@ -1,3 +1,5 @@
+
+
 var GameEntryScene = new Phaser.Class({
     Extends: Phaser.Scene,
     initialize: function() {
@@ -31,6 +33,7 @@ var GameEntryScene = new Phaser.Class({
             loop: true
         });
         this.sound.pauseOnBlur = false;
+        
 
         // begin scene text
         this.add

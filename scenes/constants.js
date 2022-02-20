@@ -351,10 +351,17 @@ function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale)
 
 function spawnMainCharacter(scene, x, y, anim, scale)
 {
+    scene.cameras.main.setBounds(0, 0, 1024, 2048);
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
     mainCharacter.character.play(anim);
+
+    scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
+        // this.cameras.main.roundPixels = true;
+    
+    scene.cameras.main.setZoom(2);
+
 }
 
 function processInput()
