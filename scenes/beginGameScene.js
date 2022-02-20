@@ -1,3 +1,19 @@
+const main_character_anim_keys = [
+    'idle_down', 'idle_up', 'idle_left', 'idle_right',
+    'walk_down', 'walk_up', 'walk_right', 'walk_left',
+    'run_down', 'run_up', 'run_right', 'run_left',
+    'tilling_down', 'tilling_up', 'tilling_left', 'tilling_right',
+    'chopping_down', 'chopping_up', 'chopping_left', 'chopping_right',
+    'watering_down', 'watering_up', 'watering_left', 'watering_right',
+];
+
+var keyW;
+var keyS;
+var keyA;
+var keyD;
+var currentPlayingAnim = 'idle_down';
+var cat;
+
 var BeginGameScene = new Phaser.Class({
     Extends: Phaser.Scene,
     initialize: function() {
@@ -162,16 +178,12 @@ var BeginGameScene = new Phaser.Class({
             frameRate: 8,
             repeat: -1
         });
-        const main_character_anim_keys = [
-            'idle_down', 'idle_up', 'idle_left', 'idle_right',
-            'walk_down', 'walk_up', 'walk_right', 'walk_left',
-            'run_down', 'run_up', 'run_right', 'run_left',
-            'tilling_down', 'tilling_up', 'tilling_left', 'tilling_right',
-            'chopping_down', 'chopping_up', 'chopping_left', 'chopping_right',
-            'watering_down', 'watering_up', 'watering_left', 'watering_right',
-        ];
         /** End of Main Characrer Animation Set **/
         /********************* End of Animation set *********************/
+        keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         var text = this.add.text(
             640, 
             360, 
@@ -183,9 +195,53 @@ var BeginGameScene = new Phaser.Class({
             }
         ).setOrigin(0.5);
 
-        const cat = this.add.sprite(640, 360);
+        cat = this.add.sprite(640, 360);
         cat.setScale(3);
         cat.play('idle_down');
     },
-    update: function() {}
+    update: function() {
+        if (keyW.isDown)
+        {
+            currentPlayingAnim = 'walk_up';
+            cat.play('walk_up');
+        }
+        else if (keyS.isDown)
+        {
+            currentPlayingAnim = 'walk_down';
+            cat.play('walk_down');
+        }
+        else if (keyA.isDown)
+        {
+            currentPlayingAnim = 'walk_left';
+            cat.play('walk_left');
+        }
+        else if (keyD.isDown)
+        {
+            currentPlayingAnim = 'walk_right';
+            cat.play('walk_right');
+        }
+        else
+        {
+            if (currentPlayingAnim === 'walk_right')
+            {
+                currentPlayingAnim = 'idle_right';
+                cat.play('idle_right');
+            }
+            else if (currentPlayingAnim === 'walk_left')
+            {
+                currentPlayingAnim = 'idle_left';
+                cat.play('idle_left');
+            }
+            else if (currentPlayingAnim === 'walk_up')
+            {
+                currentPlayingAnim = 'idle_up';
+                cat.play('idle_up');
+            }
+            else if (currentPlayingAnim === 'walk_down')
+            {
+                currentPlayingAnim = 'idle_down';
+                cat.play('idle_down');
+            }
+        }
+    }
 });
