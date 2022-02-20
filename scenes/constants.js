@@ -25,6 +25,16 @@ class MainCharacter extends AnimatedObject {
     constructor() {
         super('idle_down');
     }
+    updateSize()
+    {
+        if (this.direction == 0 || this.direction == 1) {
+            this.character.setSize(16, 14);
+            this.character.setOffset(16, 18);
+        } else {
+            mainCharacter.character.setSize(8, 14);
+            mainCharacter.character.setOffset(20, 18);
+        }
+    }
 }
 
 /** Global Variables **/
@@ -342,23 +352,27 @@ function associateKeyboardInputs(scene)
     keyV = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
-function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale)
+function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale, texture, collides)
 {
-    animatedObj.character = scene.add.sprite(x, y);
+    animatedObj.character = scene.physics.add.sprite(x, y, texture);
+    animatedObj.character.setCollideWorldBounds(collides);
     animatedObj.character.setScale(scale);
     animatedObj.character.play(anim);
 }
 
 function spawnMainCharacter(scene, x, y, anim, scale)
 {
+    console.log(scene.physics.add.sprite(x, y, 'main_character'))
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
+    mainCharacter.updateSize();
     mainCharacter.character.play(anim);
 }
 
 function processInput()
 {
+    mainCharacter.updateSize();
     if (!mainCharacter.disabledMoving) {
         // check for tilling
         if (keyX.isDown) {
