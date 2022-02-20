@@ -392,6 +392,10 @@ function processInput(scene)
         let yPos = (mainCharacter.character.y - 5 * 16) / 16;
         // check for tilling
         if (keyX.isDown) {
+            scene.sound.play('collect_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
+
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'tilling_up';
@@ -411,6 +415,9 @@ function processInput(scene)
                 mainCharacter.character.play('tilling_right');
             }
         } else if (keyC.isDown) {
+            scene.sound.play('collect_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'chopping_up';
@@ -426,6 +433,9 @@ function processInput(scene)
                 mainCharacter.character.play('chopping_right');
             }
         } else if (keyV.isDown) {
+            scene.sound.play('water_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'watering_up';

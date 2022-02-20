@@ -2,16 +2,31 @@
 <html>
     <head>
         <title>Farm Under Pandemic</title>
+        <script src="https://kit.fontawesome.com/a4ac0f466d.js" crossorigin="anonymous"></script>
         <link rel="icon" type="image/x-icon" href="assets/favicon.png">
         <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
         <script src="scenes/constants.js"></script>
         <script src="scenes/gameEntryScene.js"></script>
         <script src="scenes/beginGameScene.js"></script>
         <script src="scenes/gameoverScene.js"></script>
+
         
     </head>
     <body>
         <div id="game"></div>
+        <div>Use 
+            <i class="fa-solid fa-w"></i>
+            <i class="fa-solid fa-a"></i>
+            <i class="fa-solid fa-s"></i>
+            <i class="fa-solid fa-d"></i>
+             to move around
+        </div>
+        <div>Use 
+            <i class="fa-solid fa-v"></i> for watering, 
+            <i class="fa-solid fa-c"></i> for chopping trees,
+            <i class="fa-solid fa-x"></i> for tilling up
+        </div>
+        <i class="fa-solid fa-left"></i>
         <script>
             const phaserConfig = {
                 type: Phaser.AUTO,

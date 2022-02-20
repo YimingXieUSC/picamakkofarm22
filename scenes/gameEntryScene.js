@@ -10,6 +10,7 @@ var GameEntryScene = new Phaser.Class({
         this.load.image('farm_background', 'assets/beginPic.png');
         this.load.image('start_button', 'assets/ui/buttons/B_BT_Start_single.png');
         this.load.audio('menu_music', 'assets/bgm/menu.mp3');
+        
 
     
     },
