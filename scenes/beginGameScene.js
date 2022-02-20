@@ -21,8 +21,8 @@ var BeginGameScene = new Phaser.Class({
         this.load.image('start_button', 'assets/ui/buttons/B_BT_Start_single.png');
 
         // map
-        this.load.image("tiles","assets/tileset3.png");
-        this.load.tilemapTiledJSON('map',"assets/tilemap7.json");
+        this.load.image("tiles","assets/tileset7.png");
+        this.load.tilemapTiledJSON('map',"assets/tilemap9.json");
         
 
     },
@@ -39,13 +39,29 @@ var BeginGameScene = new Phaser.Class({
 
         // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
         // Phaser's cache (i.e. the name you used in preload)
-        const tileset = map.addTilesetImage("tileset6", "tiles");
+        const tileset = map.addTilesetImage("tileset7", "tiles");
 
         // Parameters: layer name (or index) from Tiled, tileset, x, y
-        const ttt1 = map.createStaticLayer("ttt1", tileset, 0, 0);
-        const ttt2 = map.createStaticLayer("ttt2", tileset, 0, 0);
-        const ttt3 = map.createStaticLayer("ttt3", tileset, 0, 0);
+        const belowLayer1 = map.createStaticLayer("belowLayer1", tileset, 0, 0);
+        const belowLayer2 = map.createStaticLayer("belowLayer2", tileset, 0, 0);
+        const belowLayer3 = map.createStaticLayer("belowLayer3", tileset, 0, 0);
+        const worldLayer = map.createStaticLayer("worldLayer", tileset, 0, 0);
+        const worldLayer2 = map.createStaticLayer("worldLayer2", tileset, 0, 0);
+        
+        worldLayer.setCollisionByProperty({ collides: true });
+        worldLayer2.setCollisionByProperty({ collides: true });
 
+        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        worldLayer.renderDebug(debugGraphics, {
+            tileColor: null, // Color of non-colliding tiles
+            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+            faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+        });
+        worldLayer2.renderDebug(debugGraphics, {
+            tileColor: null, // Color of non-colliding tiles
+            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+            faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
+        });
 
         createAnimation(this);
         associateKeyboardInputs(this);
