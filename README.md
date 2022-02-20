@@ -19,6 +19,13 @@ To start the game, first run `node index.js` and then go to `http://127.0.0.1:81
 ## Demo
 Check out the demo on [YouTube](https://youtu.be/CTSidrK51-o).
 
+More screenshots:
+<img width="1010" alt="Screen Shot 2022-02-20 at 11 54 53 AM" src="https://user-images.githubusercontent.com/68513408/154862100-709a8c03-b3f5-4f9e-b73c-acb6343a6c3d.png">
+
+<img width="1007" alt="Screen Shot 2022-02-20 at 11 55 30 AM" src="https://user-images.githubusercontent.com/68513408/154862103-b1d841be-3107-41ab-a29a-d084baa756f3.png">
+
+<img width="1015" alt="Screen Shot 2022-02-20 at 11 56 14 AM" src="https://user-images.githubusercontent.com/68513408/154862107-8190e33f-fc3e-482e-8228-2ec782e92904.png">
+
 Enjoy!
 
 
