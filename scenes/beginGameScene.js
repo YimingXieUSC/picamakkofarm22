@@ -23,6 +23,9 @@ var BeginGameScene = new Phaser.Class({
         // map
         this.load.image("tiles","assets/tileset7.png");
         this.load.tilemapTiledJSON('map',"assets/tilemap9.json");
+
+        this.load.audio('collect_sound', 'assets/bgm/collect_sound.mp3');
+        this.load.audio('water_sound', 'assets/bgm/watering.mp3');
         
 
     },
@@ -72,6 +75,6 @@ var BeginGameScene = new Phaser.Class({
         this.physics.add.collider( mainCharacter.character, worldLayer2);
     },
     update: function() {
-        processInput();
+        processInput(this);
     }
 });

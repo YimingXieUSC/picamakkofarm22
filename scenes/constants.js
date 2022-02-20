@@ -364,12 +364,16 @@ function spawnMainCharacter(scene, x, y, anim, scale)
 
 }
 
-function processInput()
+function processInput(scene)
 {
     mainCharacter.character.setVelocity(0);
     if (!mainCharacter.disabledMoving) {
         // check for tilling
         if (keyX.isDown) {
+            scene.sound.play('collect_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
+
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'tilling_up';
@@ -385,6 +389,9 @@ function processInput()
                 mainCharacter.character.play('tilling_right');
             }
         } else if (keyC.isDown) {
+            scene.sound.play('collect_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'chopping_up';
@@ -400,6 +407,9 @@ function processInput()
                 mainCharacter.character.play('chopping_right');
             }
         } else if (keyV.isDown) {
+            scene.sound.play('water_sound', {
+            });
+            scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'watering_up';
