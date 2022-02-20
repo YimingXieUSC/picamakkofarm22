@@ -51,6 +51,8 @@ var BeginGameScene = new Phaser.Class({
         worldLayer.setCollisionByProperty({ collide: true });
         worldLayer2.setCollisionByProperty({ collide: true });
 
+
+
         createAnimation(this);
         associateKeyboardInputs(this);
 

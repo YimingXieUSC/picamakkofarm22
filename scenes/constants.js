@@ -1,5 +1,5 @@
 /** Constants **/
-const WALKING_SPEED = 35;
+const WALKING_SPEED = 45;
 const RUNNING_SPEED = 70;
 const SCREEN_RIGHT = 640;
 const SCREEN_BOTTOM = 370;
@@ -352,8 +352,8 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
-    mainCharacter.character.setSize(14, 14);
-    mainCharacter.character.setOffset(17, 18);
+    mainCharacter.character.setSize(12, 10);
+    mainCharacter.character.setOffset(18, 20);
     mainCharacter.character.play(anim);
 }
 
