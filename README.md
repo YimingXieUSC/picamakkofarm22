@@ -6,4 +6,11 @@ Assets from [Cup Nooble](https://cupnooble.itch.io/sprout-lands-asset-pack) and 
 UI components from [IDLandGames](https://idlandgames.itch.io/ui-pixelart-assets-8)
 
 
+To start the game: 
+```
+node index.js
+
+```
+and then go to `http://127.0.0.1:8125/`.
+
 
