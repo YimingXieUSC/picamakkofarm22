@@ -40,9 +40,9 @@ var HomeScene = new Phaser.Class({
         const tileset = map.addTilesetImage("interior_tileset", "tiles");
 
         // Parameters: layer name (or index) from Tiled, tileset, x, y
-        const underLayer = map.createStaticLayer("underLayer", tileset, 0, 0);
-        const worldLayer2 = map.createStaticLayer("worldLayer2", tileset, 0, 0);
-        const worldLayer = map.createStaticLayer("worldLayer", tileset, 0, 0);
+        const underLayers = map.createStaticLayer("underLayers", tileset, 0, 0);
+        const worldLayers2 = map.createStaticLayer("worldLayers2", tileset, 0, 0);
+        const worldLayers = map.createStaticLayer("worldLayers", tileset, 0, 0);
         
         worldLayer.setCollisionByProperty({ collide: true });
         worldLayer2.setCollisionByProperty({ collide: true });
