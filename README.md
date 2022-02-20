@@ -1,11 +1,16 @@
 # Athenahacks 2022 - Farm under Pandemic. 
 ![Thumbnail](./thumbnail.jpg)
 
-The team members are [Yiming Xie](https://www.linkedin.com/in/yimingx/) and [Shuning Zhang](https://skkkzhang.com/)
+## Team Information
+The team members are：
+- [Yiming Xie](https://www.linkedin.com/in/yimingx/): yimingx@usc.edu
+- [Shuning Zhang](https://skkkzhang.com/): shuningz@usc.edu
 
-Assets from [Cup Nooble](https://cupnooble.itch.io/sprout-lands-asset-pack) and [CraftPix](https://craftpix.net/freebies/free-level-map-pixel-art-assets-pack/)  
-UI components from [IDLandGames](https://idlandgames.itch.io/ui-pixelart-assets-8)  
-Favicon from [StardewValley](https://stardewvalleywiki.com/File:Steel_Hoe.png)
+## Asset Sources
+- Main character animation, object animation, tiles assets from [Cup Nooble](https://cupnooble.itch.io/sprout-lands-asset-pack) and [CraftPix](https://craftpix.net/freebies/free-level-map-pixel-art-assets-pack/)  
+- UI components from [IDLandGames](https://idlandgames.itch.io/ui-pixelart-assets-8)  
+- Favicon and background music from [StardewValley](https://stardewvalleywiki.com/Stardew_Valley_Wiki)  
+- Tilling, chopping, watering sound effects created by [Yiming Xie](https://www.linkedin.com/in/yimingx/)
 
 Before starting the game, please make sure you have installed node.js and have canva enabled on your browser. 
 
