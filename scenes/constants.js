@@ -1,12 +1,9 @@
 /** Constants **/
-const WALKING_SPEED = 0.8;
-const RUNNING_SPEED = 1.5;
-const SCREEN_LEFT = 0;
+const WALKING_SPEED = 45;
+const RUNNING_SPEED = 70;
 const SCREEN_RIGHT = 640;
-const SCREEN_TOP = 0;
 const SCREEN_BOTTOM = 370;
-const MAIN_CHARACTER_SCALE = 1.5;
-const MAIN_CHARACTER_SIZE = 16;
+const MAIN_CHARACTER_SCALE = 1.2;
 const allDirections = ['down', 'up', 'left', 'right'];
 
 /** Useful Classes **/
@@ -342,9 +339,10 @@ function associateKeyboardInputs(scene)
     keyV = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 }
 
-function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale)
+function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale, texture, collides)
 {
-    animatedObj.character = scene.add.sprite(x, y);
+    animatedObj.character = scene.physics.add.sprite(x, y, texture);
+    animatedObj.character.setCollideWorldBounds(collides);
     animatedObj.character.setScale(scale);
     animatedObj.character.play(anim);
 }
@@ -355,6 +353,8 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
+    mainCharacter.character.setSize(12, 10);
+    mainCharacter.character.setOffset(18, 20);
     mainCharacter.character.play(anim);
 
     scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
@@ -366,6 +366,7 @@ function spawnMainCharacter(scene, x, y, anim, scale)
 
 function processInput()
 {
+    mainCharacter.character.setVelocity(0);
     if (!mainCharacter.disabledMoving) {
         // check for tilling
         if (keyX.isDown) {
@@ -421,16 +422,14 @@ function processInput()
                     mainCharacter.currentPlayingAnim = 'run_up';
                     mainCharacter.character.play('run_up');
                 }
-                mainCharacter.character.y = Math.max(mainCharacter.character.y - RUNNING_SPEED,
-                    SCREEN_TOP + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityY(-RUNNING_SPEED);
             } else {
                 mainCharacter.running = false;
                 if (mainCharacter.currentPlayingAnim !== 'walk_up') {
                     mainCharacter.currentPlayingAnim = 'walk_up';
                     mainCharacter.character.play('walk_up');
                 }
-                mainCharacter.character.y = Math.max(mainCharacter.character.y - WALKING_SPEED,
-                    SCREEN_TOP + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityY(-WALKING_SPEED);
             }
         } else if (keyS.isDown) {
             mainCharacter.direction = 0;
@@ -440,16 +439,14 @@ function processInput()
                     mainCharacter.currentPlayingAnim = 'run_down';
                     mainCharacter.character.play('run_down');
                 }
-                mainCharacter.character.y = Math.min(mainCharacter.character.y + RUNNING_SPEED,
-                    SCREEN_BOTTOM - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityY(RUNNING_SPEED);
             } else {
                 mainCharacter.running = false;
                 if (mainCharacter.currentPlayingAnim !== 'walk_down') {
                     mainCharacter.currentPlayingAnim = 'walk_down';
                     mainCharacter.character.play('walk_down');
                 }
-                mainCharacter.character.y = Math.min(mainCharacter.character.y + WALKING_SPEED,
-                    SCREEN_BOTTOM - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityY(WALKING_SPEED);
             }
         } else if (keyA.isDown) {
             mainCharacter.direction = 2;
@@ -459,16 +456,14 @@ function processInput()
                     mainCharacter.currentPlayingAnim = 'run_left';
                     mainCharacter.character.play('run_left');
                 }
-                mainCharacter.character.x = Math.max(mainCharacter.character.x - RUNNING_SPEED,
-                    SCREEN_LEFT + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityX(-RUNNING_SPEED);
             } else {
                 mainCharacter.running = false;
                 if (mainCharacter.currentPlayingAnim !== 'walk_left') {
                     mainCharacter.currentPlayingAnim = 'walk_left';
                     mainCharacter.character.play('walk_left');
                 }
-                mainCharacter.character.x = Math.max(mainCharacter.character.x - WALKING_SPEED,
-                    SCREEN_LEFT + MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityX(-WALKING_SPEED);
             }
         } else if (keyD.isDown) {
             mainCharacter.direction = 3;
@@ -478,16 +473,14 @@ function processInput()
                     mainCharacter.currentPlayingAnim = 'run_right';
                     mainCharacter.character.play('run_right');
                 }
-                mainCharacter.character.x = Math.min(mainCharacter.character.x + RUNNING_SPEED,
-                    SCREEN_RIGHT - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityX(RUNNING_SPEED);
             } else {
                 mainCharacter.running = false;
                 if (mainCharacter.currentPlayingAnim !== 'walk_right') {
                     mainCharacter.currentPlayingAnim = 'walk_right';
                     mainCharacter.character.play('walk_right');
                 }
-                mainCharacter.character.x = Math.min(mainCharacter.character.x + WALKING_SPEED,
-                    SCREEN_RIGHT - MAIN_CHARACTER_SCALE * MAIN_CHARACTER_SIZE / 2);
+                mainCharacter.character.setVelocityX(WALKING_SPEED);
             }
         } else {
             mainCharacter.running = false;

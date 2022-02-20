@@ -48,20 +48,10 @@ var BeginGameScene = new Phaser.Class({
         const worldLayer = map.createStaticLayer("worldLayer", tileset, 0, 0);
         const worldLayer2 = map.createStaticLayer("worldLayer2", tileset, 0, 0);
         
-        worldLayer.setCollisionByProperty({ collides: true });
-        worldLayer2.setCollisionByProperty({ collides: true });
+        worldLayer.setCollisionByProperty({ collide: true });
+        worldLayer2.setCollisionByProperty({ collide: true });
 
-        const debugGraphics = this.add.graphics().setAlpha(0.75);
-        worldLayer.renderDebug(debugGraphics, {
-            tileColor: null, // Color of non-colliding tiles
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-        });
-        worldLayer2.renderDebug(debugGraphics, {
-            tileColor: null, // Color of non-colliding tiles
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
-        });
+
 
         
         createAnimation(this);
@@ -77,7 +67,9 @@ var BeginGameScene = new Phaser.Class({
         this.input.on('gameobjectdown', this.onObjectClicked, this);
         
         // add the main character
-        spawnMainCharacter(this, SCREEN_RIGHT / 4 -30, SCREEN_BOTTOM / 2 - 80, 'idle_down');
+        spawnMainCharacter(this, SCREEN_RIGHT / 4 - 30, SCREEN_BOTTOM / 2 - 80, 'idle_down', MAIN_CHARACTER_SCALE);
+        this.physics.add.collider( mainCharacter.character, worldLayer);
+        this.physics.add.collider( mainCharacter.character, worldLayer2);
     },
     update: function() {
         processInput();
