@@ -54,28 +54,24 @@ var BeginGameScene = new Phaser.Class({
 		const pearTree = new AnimatedObject('pear_tree_moving');
 		spawnAnimatedObject(this, SCREEN_RIGHT / 5, SCREEN_BOTTOM / 5,
 		  'pear_tree_static', pearTree, MAIN_CHARACTER_SCALE, 'pear_trees', true);
-		pearTree.character.setSize(25, 30);
-		pearTree.character.setOffset(11, 12);
+		pearTree.character.setSize(25, 26);
+		pearTree.character.setOffset(11, 16);
 		pearTree.character.setImmovable(true);
 		this.physics.add.collider(
 		  mainCharacter.character, pearTree.character,
 		  function (_player, _tree)
 		  {
-			  console.log(_player.body.overlapX)
-		// 	  let speed = mainCharacter.running ? RUNNING_SPEED : WALKING_SPEED;
-		// 	  // going up
-		// 	  if (mainCharacter.direction === 0 && _player.body.touching.up) {
-		// 		  _player.y -= speed;
-		// 	  } else if (mainCharacter.direction === 1 && _player.body.touching.down) {  // going down
-		// 		  _player.y += speed;
-		// 	  } else if (mainCharacter.direction === 2 && _player.body.touching.left) {
-		// 		  _player.x += speed;
-		// 	  } else if (mainCharacter.direction === 3 && _player.body.touching.right) {
-		// 		  _player.x -= speed;
-		// 	  }
+			  if (_player.body.touching.down)
+			  {
+				  _player.depth = 0;
+				  _tree.depth = 10;
+			  } else {
+				  _player.depth = 10;
+				  _tree.depth = 0;
+			  }
 		  });
 
-		// this.physics.add.collider(mainCharacter.character, pearTree.character);
+		this.physics.add.collider(mainCharacter.character, pearTree.character);
 	},
 	update: function() {
 		processInput();
