@@ -16,6 +16,12 @@
                 parent: "game",
                 width: SCREEN_RIGHT,
                 height: SCREEN_BOTTOM,
+                physics: {
+                    default: "arcade",
+                    arcade: {
+                        gravity: { y: 0 } // Top down game, so no gravity
+                    }
+                },
                 backgroundColor: "#658CA1",
                 scene: [BeginGameScene, GameOverScene, GameEntryScene]
             };

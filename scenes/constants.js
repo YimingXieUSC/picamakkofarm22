@@ -349,6 +349,14 @@ function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale)
     animatedObj.character.play(anim);
 }
 
+function spawnMainCharacter(scene, x, y, anim, scale)
+{
+    mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
+    mainCharacter.character.setCollideWorldBounds(true);
+    mainCharacter.character.setScale(scale);
+    mainCharacter.character.play(anim);
+}
+
 function processInput()
 {
     if (!mainCharacter.disabledMoving) {
