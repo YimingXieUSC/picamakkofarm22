@@ -1,4 +1,4 @@
-# This is a repository created for Athenahacks 2022. 
+# Athenahacks 2022 - Farm under Pandemic. 
 
 The team members are [Yiming Xie](https://www.linkedin.com/in/yimingx/) and [Shuning Zhang](https://skkkzhang.com/)
 
