@@ -371,7 +371,6 @@ function spawnMainCharacter(scene, x, y, anim, scale)
 
 function processInput()
 {
-    mainCharacter.updateSize();
     mainCharacter.character.setVelocity(0);
     if (!mainCharacter.disabledMoving) {
         // check for tilling
@@ -496,6 +495,7 @@ function processInput()
                 mainCharacter.character.play(mainCharacter.currentPlayingAnim);
             }
         }
+        mainCharacter.updateSize();
     }
     else if (!mainCharacter.character.anims.isPlaying)
     {
