@@ -182,6 +182,10 @@ var BeginGameScene = new Phaser.Class({
                 fontStyle: "bold"
             }
         ).setOrigin(0.5);
+
+        const cat = this.add.sprite(640, 360);
+        cat.setScale(3);
+        cat.play('idle_down');
     },
     update: function() {}
 });
