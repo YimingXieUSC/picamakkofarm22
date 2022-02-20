@@ -53,6 +53,7 @@ var BeginGameScene = new Phaser.Class({
 
 
 
+        
         createAnimation(this);
         associateKeyboardInputs(this);
 
