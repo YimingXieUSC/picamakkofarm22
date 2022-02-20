@@ -9,6 +9,7 @@
         <script src="scenes/gameEntryScene.js"></script>
         <script src="scenes/beginGameScene.js"></script>
         <script src="scenes/gameoverScene.js"></script>
+        <script src="scenes/homeScene.js"></script>
 
         
     </head>
@@ -40,7 +41,7 @@
                     }
                 },
                 backgroundColor: "#658CA1",
-                scene: [GameEntryScene, BeginGameScene, GameOverScene]
+                scene: [HomeScene, GameEntryScene, BeginGameScene, GameOverScene]
             };
 
             const game = new Phaser.Game(phaserConfig);
