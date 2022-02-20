@@ -22,16 +22,6 @@ class MainCharacter extends AnimatedObject {
     constructor() {
         super('idle_down');
     }
-    updateSize()
-    {
-        if (this.direction == 0 || this.direction == 1) {
-            this.character.setSize(16, 14);
-            this.character.setOffset(16, 18);
-        } else {
-            mainCharacter.character.setSize(8, 14);
-            mainCharacter.character.setOffset(20, 18);
-        }
-    }
 }
 
 /** Global Variables **/
@@ -362,7 +352,8 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
-    mainCharacter.updateSize();
+    mainCharacter.character.setSize(14, 14);
+    mainCharacter.character.setOffset(17, 18);
     mainCharacter.character.play(anim);
 }
 
@@ -492,7 +483,6 @@ function processInput()
                 mainCharacter.character.play(mainCharacter.currentPlayingAnim);
             }
         }
-        mainCharacter.updateSize();
     }
     else if (!mainCharacter.character.anims.isPlaying)
     {
