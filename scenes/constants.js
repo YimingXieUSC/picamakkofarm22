@@ -449,16 +449,16 @@ function processInput(scene)
             });
             scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
-            if (mainCharacter.direction == 1) {
+            if (mainCharacter.direction === 1) {
                 mainCharacter.currentPlayingAnim = 'chopping_up';
                 mainCharacter.character.play('chopping_up');
-            } else if (mainCharacter.direction == 0) {
+            } else if (mainCharacter.direction === 0) {
                 mainCharacter.currentPlayingAnim = 'chopping_down';
                 mainCharacter.character.play('chopping_down');
-            } else if (mainCharacter.direction == 2) {
+            } else if (mainCharacter.direction === 2) {
                 mainCharacter.currentPlayingAnim = 'chopping_left';
                 mainCharacter.character.play('chopping_left');
-            } else if (mainCharacter.direction == 3) {
+            } else if (mainCharacter.direction === 3) {
                 mainCharacter.currentPlayingAnim = 'chopping_right';
                 mainCharacter.character.play('chopping_right');
             }
