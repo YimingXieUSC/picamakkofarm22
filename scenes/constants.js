@@ -380,6 +380,8 @@ function tillSoil(scene, x, y) {
     let xPos = x + 8;
     let yPos = y + 8;
     let soil = scene.add.image(xPos, yPos, 'tilled_soil');
+    scene.sound.play('collect_sound', {});
+    scene.sound.pauseOnBlur = false;
     tilledSoils.push(soil);
     soil.setDepth(1);
 }
@@ -392,27 +394,35 @@ function processInput(scene)
         let yPos = (mainCharacter.character.y - 5 * 16) / 16;
         // check for tilling
         if (keyX.isDown) {
-            scene.sound.play('collect_sound', {
-            });
-            scene.sound.pauseOnBlur = false;
-
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'tilling_up';
                 mainCharacter.character.play('tilling_up');
                 if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
                   mainCharacter.character.y > yMin && mainCharacter.character.y < yMax_bottom_facing_up) {
-                    tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.floor(yPos - 1) + 5) * 16);
+                    tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.max(Math.floor(yPos - 1), 0) + 5) * 16);
                 }
             } else if (mainCharacter.direction == 0) {
                 mainCharacter.currentPlayingAnim = 'tilling_down';
                 mainCharacter.character.play('tilling_down');
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin_up_facing_down && mainCharacter.character.y < yMax) {
+                    tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.min(Math.floor(yPos + 1), 7) + 5) * 16);
+                }
             } else if (mainCharacter.direction == 2) {
                 mainCharacter.currentPlayingAnim = 'tilling_left';
                 mainCharacter.character.play('tilling_left');
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax_right_facing_left &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax) {
+                    tillSoil(scene, (Math.max(Math.floor(xPos - 1), 0) + 8) * 16, (Math.round(yPos) + 5) * 16);
+                }
             } else if (mainCharacter.direction == 3) {
                 mainCharacter.currentPlayingAnim = 'tilling_right';
                 mainCharacter.character.play('tilling_right');
+                if (mainCharacter.character.x > xMin_left_facing_right && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax) {
+                    tillSoil(scene, (Math.min(Math.floor(xPos + 1), 10) + 8) * 16, (Math.round(yPos) + 5) * 16);
+                }
             }
         } else if (keyC.isDown) {
             scene.sound.play('collect_sound', {
