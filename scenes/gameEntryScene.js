@@ -6,13 +6,12 @@ var GameEntryScene = new Phaser.Class({
     init: function() {},
     preload: function() {
         this.load.image('farm_background', 'assets/beginPic.png');
-        this.load.image('start_button', 'assets/ui/buttons/B_BT_Start.png');
+        this.load.image('start_button', 'assets/ui/buttons/B_BT_Start_single.png');
         this.load.audio('menu_music', 'assets/bgm/menu.mp3');
 
     
     },
     onObjectClicked() {
-
         console.log("Object clicked");
 
         this.scene.start("BeginGameScene", {
@@ -21,7 +20,7 @@ var GameEntryScene = new Phaser.Class({
     
     },
     create: function() {
-            // begin scene background
+        // begin scene background
         const { width, height } = this.sys.game.config;
 
         const bg = this.add.tileSprite(0, 0, width, height, "farm_background");
@@ -43,13 +42,24 @@ var GameEntryScene = new Phaser.Class({
         .setOrigin(0.5, 0.5)
         .setShadow(5, 5, "#658CA1", 0, true, true);
 
-        // this.house = this.add.image(640, 360, "house");
 
         // button to the next scene
         var playButton = this.add.image(SCREEN_RIGHT / 2, SCREEN_BOTTOM * 3 / 4, 'start_button').setDepth(1);
         playButton.setScale(3);
 
         playButton.setInteractive();
+
+        this.input.on('pointerover', function (event, gameObjects) {
+
+            gameObjects[0].setTint(0xF5C222);
+    
+        });
+    
+        this.input.on('pointerout', function (event, gameObjects) {
+    
+            gameObjects[0].clearTint();
+    
+        });
 
         this.input.on('gameobjectdown', this.onObjectClicked, this);
 

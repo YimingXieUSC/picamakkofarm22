@@ -6,10 +6,19 @@ var BeginGameScene = new Phaser.Class({
     init: function(data) {
         this.message = data.message;
     },
+    onObjectClicked() {
+        console.log("Object clicked");
+
+        this.scene.start("GameEntryScene", {
+            "message": "Start Over"
+        });
+    
+    },
     preload: function() {
         preloadAnimation(this);
 
-        this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit.png');
+        this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit_single.png');
+        this.load.image('start_button', 'assets/ui/buttons/B_BT_Start_single.png');
 
         // map
         this.load.image("tiles","assets/tileset3.png");
@@ -19,8 +28,8 @@ var BeginGameScene = new Phaser.Class({
     },
     onObjectClicked() {
         console.log("Quitting the game");
-        this.scene.start("GameOverScene", {
-            "message": "Game over"
+        this.scene.start("GameEntryScene", {
+            "message": "Start over"
         });
     
     },
@@ -28,39 +37,30 @@ var BeginGameScene = new Phaser.Class({
         // tilemaps
         const map = this.make.tilemap({ key: "map" });
 
-  // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
-  // Phaser's cache (i.e. the name you used in preload)
-  const tileset = map.addTilesetImage("tileset6", "tiles");
+        // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
+        // Phaser's cache (i.e. the name you used in preload)
+        const tileset = map.addTilesetImage("tileset6", "tiles");
 
-  // Parameters: layer name (or index) from Tiled, tileset, x, y
-  const ttt1 = map.createStaticLayer("ttt1", tileset, 0, 0);
-  const ttt2 = map.createStaticLayer("ttt2", tileset, 0, 0);
-  const ttt3 = map.createStaticLayer("ttt3", tileset, 0, 0);
+        // Parameters: layer name (or index) from Tiled, tileset, x, y
+        const ttt1 = map.createStaticLayer("ttt1", tileset, 0, 0);
+        const ttt2 = map.createStaticLayer("ttt2", tileset, 0, 0);
+        const ttt3 = map.createStaticLayer("ttt3", tileset, 0, 0);
 
 
         createAnimation(this);
         associateKeyboardInputs(this);
 
-        var text = this.add.text(
-            SCREEN_RIGHT / 2,
-            SCREEN_BOTTOM / 2,
-            "main game", 
-            {
-                fontSize: 25,
-                color: "#FFFFFF",
-                fontStyle: "bold"
-            }
-        ).setOrigin(0.5);
+        // UI
+        var quitButton = this.add.image(SCREEN_RIGHT - 50 , 20, 'quit_button').setDepth(1);
+
 
         // button to quit the game
-        var playButton = this.add.image(1200, 40, 'quit_button').setDepth(1);
-        playButton.setScale(2);
-        playButton.setInteractive();
+        quitButton.setInteractive();
 
         this.input.on('gameobjectdown', this.onObjectClicked, this);
         
         // add the main character
-        spawnMainCharacter(this, SCREEN_RIGHT / 2, SCREEN_BOTTOM / 2, 'idle_down');
+        spawnMainCharacter(this, SCREEN_RIGHT / 4 -30, SCREEN_BOTTOM / 2 - 80, 'idle_down');
     },
     update: function() {
         processInput();
