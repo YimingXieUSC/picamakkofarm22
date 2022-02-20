@@ -7,6 +7,16 @@ var GameEntryScene = new Phaser.Class({
     preload: function() {
         this.load.image('farm_background', 'assets/beginPic.png');
         this.load.image('house', 'assets/tilesets/Objects/Houses/1.png');
+        this.load.audio('menu_music', 'assets/bgm/menu.mp3');
+    
+    },
+    onObjectClicked() {
+
+        console.log("Object clicked");
+
+        this.scene.start("BeginGameScene", {
+            "message": "Game over"
+        });
     
     },
     create: function() {
@@ -15,6 +25,11 @@ var GameEntryScene = new Phaser.Class({
 
         const bg = this.add.tileSprite(0, 0, width, height, "farm_background");
         bg.setOrigin(0, 0);
+
+        // play music
+        this.sound.play('menu_music', {
+            loop: true
+        });
 
         // begin scene text
         this.add
@@ -28,15 +43,28 @@ var GameEntryScene = new Phaser.Class({
 
         // this.house = this.add.image(640, 360, "house");
 
-        this.time.addEvent({
-            delay: 3000, // after 3 seconds the next named scene will start
-            loop: false,
-            callback: () => {
-                this.scene.start("BeginGameScene", {
-                    "message": "Game over"
-                });
-            }
-        })
+        // button to the next scene
+        var playButton = this.add.image(640, 360, 'house').setDepth(1);
+
+        playButton.setInteractive();
+
+        this.input.on('gameobjectdown', this.onObjectClicked, this);
+
+        // playButton.on('poninterdown', function () {
+        //     this.scene.start("BeginGameScene", {
+        //         "message": "Game over"
+        //      });
+        //  }, this);
+
+        // this.time.addEvent({
+        //     delay: 30000, // after 3 seconds the next named scene will start
+        //     loop: false,
+        //     callback: () => {
+        //         this.scene.start("BeginGameScene", {
+        //             "message": "Game over"
+        //         });
+        //     }
+        // })
     },
     update: function() {}
 });

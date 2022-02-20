@@ -14,7 +14,7 @@ var BeginGameScene = new Phaser.Class({
             this.message, 
             {
                 fontSize: 50,
-                color: "#000000",
+                color: "#FFFFFF",
                 fontStyle: "bold"
             }
         ).setOrigin(0.5);
