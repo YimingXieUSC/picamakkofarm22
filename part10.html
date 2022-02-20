@@ -1,0 +1,137 @@
+<!-- <!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 10</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    backgroundColor: "#222222",
+    // physics: {
+    //     default: 'arcade',
+    //     arcade: {
+    //         gravity: { y: 300 },
+    //         debug: false
+    //     }
+    // },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var player;
+var stars;
+var bombs;
+var platforms;
+var cursors;
+var score = 0;
+var gameOver = false;
+var scoreText;
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('bomb', 'assets/bomb.png');
+    this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+
+    this.load.image('farm_background', 'assets/beginPic.png');
+    
+}
+
+function create ()
+{
+    // begin scene background
+    const { width, height } = this.sys.game.config;
+
+    const bg = this.add.tileSprite(0, 0, width, height, "farm_background");
+  bg.setOrigin(0, 0);
+
+    // begin scene text
+    this.add
+    .text(width / 2, height / 2, "Farm under Pandamic\n",
+    {
+        font: "50px monospace",
+        color: "white"
+    })
+    .setOrigin(0.5, 0.5)
+    .setShadow(5, 5, "#658CA1", 0, true, true);
+}
+
+function update ()
+{
+    // if (gameOver)
+    // {
+    //     return;
+    // }
+
+    // if (cursors.left.isDown)
+    // {
+    //     player.setVelocityX(-160);
+
+    //     player.anims.play('left', true);
+    // }
+    // else if (cursors.right.isDown)
+    // {
+    //     player.setVelocityX(160);
+
+    //     player.anims.play('right', true);
+    // }
+    // else
+    // {
+    //     player.setVelocityX(0);
+
+    //     player.anims.play('turn');
+    // }
+
+    // if (cursors.up.isDown && player.body.touching.down)
+    // {
+    //     player.setVelocityY(-330);
+    // }
+}
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
+        <script src="scenes/scene1.js"></script>
+        <script src="scenes/scene2.js"></script>
+    </head>
+    <body>
+        <div id="game"></div>
+        <script>
+            const phaserConfig = {
+                type: Phaser.AUTO,
+                parent: "game",
+                width: 1280,
+                height: 720,
+                backgroundColor: "#5DACD8",
+                scene: [SceneOne, SceneTwo]
+            };
+
+            const game = new Phaser.Game(phaserConfig);
+
+        </script>
+    </body>
+</html>

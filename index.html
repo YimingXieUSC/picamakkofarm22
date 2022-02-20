@@ -1,61 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="http://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
-</head>
-<body>
+    <head>
+        <script src="//cdn.jsdelivr.net/npm/phaser@3.24.1/dist/phaser.min.js"></script>
+        <script src="scenes/gameEntryScene.js"></script>
+        <script src="scenes/beginGameScene.js"></script>
+    </head>
+    <body>
+        <div id="game"></div>
+        <script>
+            const phaserConfig = {
+                type: Phaser.AUTO,
+                parent: "game",
+                width: 1280,
+                height: 720,
+                backgroundColor: "#658CA1",
+                scene: [GameEntryScene, BeginGameScene]
+            };
 
-    <script>
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 200 }
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create
-        }
-    };
+            const game = new Phaser.Game(phaserConfig);
 
-    var game = new Phaser.Game(config);
-
-    function preload ()
-    {
-        // this.load.setBaseURL('http://labs.phaser.io');
-        console.log(window.location.pathname);
-        this.load.image('sky', 'http://labs.phaser.io/assets/skies/space3.png');
-        this.load.image('logo', 'http://labs.phaser.io/assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'http://labs.phaser.io/assets/particles/red.png');
-        this.load.image('bomb', 'assets/star.png');
-    }
-
-    function create ()
-    {
-        this.add.image(400, 300, 'sky');
-        this.add.image(400, 400, 'bomb');
-
-        var particles = this.add.particles('red');
-
-        var emitter = particles.createEmitter({
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: 'ADD'
-        });
-
-        var logo = this.physics.add.image(400, 100, 'logo');
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        emitter.startFollow(logo);
-    }
-    </script>
-
-</body>
+        </script>
+    </body>
 </html>
