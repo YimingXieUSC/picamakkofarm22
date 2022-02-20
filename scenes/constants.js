@@ -1,5 +1,5 @@
 const WALKING_SPEED = 1;
-const RUNNING_SPEED = 3;
+const RUNNING_SPEED = 2;
 const SCREEN_LEFT = 0;
 const SCREEN_RIGHT = 1280;
 const SCREEN_TOP = 0;
