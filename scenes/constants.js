@@ -545,6 +545,13 @@ function processInput(scene)
                         "message": "Game over"
             });
             }
+            console.log(mainCharacter.character.x, mainCharacter.character.y); 
+            if(mainCharacter.character.y > 360 &&  mainCharacter.character.x > 320 && mainCharacter.character.x < 324){
+                scene.scene.start("BeginGameScene", {
+                    "message": "Go back to farm"
+                });
+                console.log(mainCharacter.character.x, mainCharacter.character.y);
+            }
         } else if (keyA.isDown) {
             mainCharacter.direction = 2;
             if (keyA.getDuration() > 1500 || mainCharacter.running) {

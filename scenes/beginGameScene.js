@@ -65,7 +65,7 @@ var BeginGameScene = new Phaser.Class({
         this.input.on('gameobjectdown', this.onObjectClicked, this);
         
         // add the main character
-        spawnMainCharacter(this, SCREEN_RIGHT / 4 - 30, SCREEN_BOTTOM / 2 - 80, 'idle_down', MAIN_CHARACTER_SCALE);
+        spawnMainCharacter(this, 376, 133, 'idle_down', MAIN_CHARACTER_SCALE);
         this.physics.add.collider( mainCharacter.character, worldLayer);
         this.physics.add.collider( mainCharacter.character, worldLayer2);
     },
