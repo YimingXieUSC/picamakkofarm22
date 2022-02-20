@@ -13,6 +13,9 @@ var keyA;
 var keyD;
 var currentPlayingAnim = 'idle_down';
 var cat;
+const WALKING_SPEED = 1;
+const RUNNING_SPEED = 3;
+var running = false;
 
 var BeginGameScene = new Phaser.Class({
     Extends: Phaser.Scene,
@@ -188,6 +191,7 @@ var BeginGameScene = new Phaser.Class({
         });
         /** End of Main Characrer Animation Set **/
         /********************* End of Animation set *********************/
+        // add key inputs for moving up, down, left, right
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -202,69 +206,131 @@ var BeginGameScene = new Phaser.Class({
                 fontStyle: "bold"
             }
         ).setOrigin(0.5);
-        cat = this.add.sprite(640, 360);
-        cat.setScale(3);
-        cat.play('idle_down');
-        
+
         // button to quit the game
         var playButton = this.add.image(1200, 40, 'quit_button').setDepth(1);
-        playButton.setScale(3);
+        playButton.setScale(2);
 
         playButton.setInteractive();
 
         this.input.on('gameobjectdown', this.onObjectClicked, this);
+        // add the main character
+        cat = this.add.sprite(640, 360);
+        cat.setScale(2);
+        cat.play('idle_down');
     },
     update: function() {
         if (keyW.isDown)
         {
-            if (currentPlayingAnim !== 'walk_up')
+            if (keyW.getDuration() > 1500 || running)
             {
-                currentPlayingAnim = 'walk_up';
-                cat.play('walk_up');
+                running = true;
+                if (currentPlayingAnim !== 'run_up')
+                {
+                    currentPlayingAnim = 'run_up';
+                    cat.play('run_up');
+                }
+                cat.y -= RUNNING_SPEED;
+            }
+            else
+            {
+                running = false;
+                if (currentPlayingAnim !== 'walk_up')
+                {
+                    currentPlayingAnim = 'walk_up';
+                    cat.play('walk_up');
+                }
+                cat.y -= WALKING_SPEED;
             }
         }
         else if (keyS.isDown)
         {
-            if (currentPlayingAnim !== 'walk_down')
+            if (keyS.getDuration() > 1500 || running)
             {
-                currentPlayingAnim = 'walk_down';
-                cat.play('walk_down');
+                running = true;
+                if (currentPlayingAnim !== 'run_down')
+                {
+                    currentPlayingAnim = 'run_down';
+                    cat.play('run_down');
+                }
+                cat.y += RUNNING_SPEED;
+            }
+            else
+            {
+                running = false;
+                if (currentPlayingAnim !== 'walk_down')
+                {
+                    currentPlayingAnim = 'walk_down';
+                    cat.play('walk_down');
+                }
+                cat.y += WALKING_SPEED;
             }
         }
         else if (keyA.isDown)
         {
-            if (currentPlayingAnim !== 'walk_left')
+            if (keyA.getDuration() > 1500 || running)
             {
-                currentPlayingAnim = 'walk_left';
-                cat.play('walk_left');
+                running = true;
+                if (currentPlayingAnim !== 'run_left')
+                {
+                    currentPlayingAnim = 'run_left';
+                    cat.play('run_left');
+                }
+                cat.x -= RUNNING_SPEED;
+            }
+            else
+            {
+                running = false;
+                if (currentPlayingAnim !== 'walk_left')
+                {
+                    currentPlayingAnim = 'walk_left';
+                    cat.play('walk_left');
+                }
+                cat.x -= WALKING_SPEED;
             }
         }
         else if (keyD.isDown)
         {
-            if (currentPlayingAnim !== 'walk_right')
+            if (keyD.getDuration() > 1500 || running)
             {
-                currentPlayingAnim = 'walk_right';
-                cat.play('walk_right');
+                running = true;
+                if (currentPlayingAnim !== 'run_right')
+                {
+                    currentPlayingAnim = 'run_right';
+                    cat.play('run_right');
+                }
+                cat.x += RUNNING_SPEED;
+            }
+            else
+            {
+                running = false;
+                if (currentPlayingAnim !== 'walk_right')
+                {
+                    currentPlayingAnim = 'walk_right';
+                    cat.play('walk_right');
+                }
+                cat.x += WALKING_SPEED;
             }
         }
         else
         {
-            if (currentPlayingAnim === 'walk_right')
+            running = false;
+            if (currentPlayingAnim === 'walk_right' || currentPlayingAnim === 'run_right')
             {
                 currentPlayingAnim = 'idle_right';
                 cat.play('idle_right');
             }
-            else if (currentPlayingAnim === 'walk_left')
+            else if (currentPlayingAnim === 'walk_left' || currentPlayingAnim === 'run_left')
             {
                 currentPlayingAnim = 'idle_left';
                 cat.play('idle_left');
             }
-            else if (currentPlayingAnim === 'walk_up')
+            else if (currentPlayingAnim === 'walk_up' || currentPlayingAnim === 'run_up')
             {
                 currentPlayingAnim = 'idle_up';
                 cat.play('idle_up');
             }
-            else if (currentPlayingAnim === 'walk_down')
+            else if (currentPlayingAnim === 'walk_down' || currentPlayingAnim === 'run_down')
             {
                 currentPlayingAnim = 'idle_down';
                 cat.play('idle_down');
