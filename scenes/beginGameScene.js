@@ -11,11 +11,11 @@ var BeginGameScene = new Phaser.Class({
 
         this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit.png');
 
-
         // map
-        this.load.image("hilled_dirt_tiles", "/assets/tilesets/Tilled_Dirt.png");
-        this.load.image("hilled_tiles", "/assets/tilesets/Hills.png");
-        this.load.tilemapCSV("map", "../assets/main_map_Tile_Layer1.csv");
+        this.load.image("tiles","assets/tileset3.png");
+        this.load.tilemapTiledJSON('map',"assets/tilemap7.json");
+        
+
     },
     onObjectClicked() {
         console.log("Quitting the game");
@@ -25,11 +25,18 @@ var BeginGameScene = new Phaser.Class({
     
     },
     create: function() {
+        // tilemaps
+        const map = this.make.tilemap({ key: "map" });
 
-        // map
-        const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16 });
-        const tileset = map.addTilesetImage("hilled_tiles");
-        const layer = map.createStaticLayer(0, tileset, 0, 0); // layer index, tileset, x, y
+  // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
+  // Phaser's cache (i.e. the name you used in preload)
+  const tileset = map.addTilesetImage("tileset6", "tiles");
+
+  // Parameters: layer name (or index) from Tiled, tileset, x, y
+  const ttt1 = map.createStaticLayer("ttt1", tileset, 0, 0);
+  const ttt2 = map.createStaticLayer("ttt2", tileset, 0, 0);
+  const ttt3 = map.createStaticLayer("ttt3", tileset, 0, 0);
+
 
         createAnimation(this);
         associateKeyboardInputs(this);
