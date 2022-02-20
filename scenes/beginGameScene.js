@@ -27,13 +27,11 @@ var BeginGameScene = new Phaser.Class({
         this.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
         this.load.image('quit_button', 'assets/ui/buttons/B_BT_Exit.png');
 
-
         // map
-        // this.load.image("tiles", "/assets/tileset_collection.png");
-        // this.load.tilemapCSV("map2", "assets/tilemap_collection2_Tile_Layer_1.csv");
-        // this.load.tilemapCSV("map2", "assets/tilemap_collection2_Tile_Layer_2.csv");
-        this.load.image("tiles","assets/tilemap_collection.png");
-      this.load.tilemapTiledJSON('map',"assets/tilemap_collection2.json");
+        this.load.image("tiles","assets/tileset3.png");
+        this.load.tilemapTiledJSON('map',"assets/tilemap7.json");
+        
+
     },
     onObjectClicked() {
         console.log("Quitting the game");
@@ -43,20 +41,18 @@ var BeginGameScene = new Phaser.Class({
     
     },
     create: function() {
+        // tilemaps
+        const map = this.make.tilemap({ key: "map" });
 
-        // // map
-        // const map = this.make.tilemap({ key: "map2", tileWidth: 16, tileHeight: 16 });
-        // // const map_water = this.make.tilemap({ key: "map_water", tileWidth: 16, tileHeight: 16 });
-        // const tileset = map.addTilesetImage("tiles1", "tiles");
-        // // const tileset_water = map_water.addTilesetImage("water_tiles");
-        // const sea = map.createStaticLayer("ground", tileset, 0, 0); // layer index, tileset, x, y
-        // const ground = map.createStaticLayer("sea", tileset, 0, 0); // layer index, tileset, x, y
-        const map = this.make.tilemap({ key: "map", tileWidth: 16, tileHeight: 16});
-        const tileset = map.addTilesetImage("tiles1","tiles",16, 16, 1, 2);
-        const layer = map.createStaticLayer("ground", tileset, 0, 0);
-        const cactusLayer = map.createStaticLayer("sea", tileset, 0, 0);
-        const hillLayer = map.createStaticLayer("land", tileset, 0, 0);
-        // const layer_water = map.createStaticLayer(1, tileset_water, 0, 0); // layer index, tileset, x, y
+  // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
+  // Phaser's cache (i.e. the name you used in preload)
+  const tileset = map.addTilesetImage("tileset6", "tiles");
+
+  // Parameters: layer name (or index) from Tiled, tileset, x, y
+  const ttt1 = map.createStaticLayer("ttt1", tileset, 0, 0);
+  const ttt2 = map.createStaticLayer("ttt2", tileset, 0, 0);
+  const ttt3 = map.createStaticLayer("ttt3", tileset, 0, 0);
+
 
         /********************* Start of Animation set *********************/
         /** Start of Main Characrer Animation Set **/
