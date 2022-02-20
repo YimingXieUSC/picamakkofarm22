@@ -510,6 +510,12 @@ function processInput(scene)
                 }
                 mainCharacter.character.setVelocityY(-WALKING_SPEED);
             }
+            if(mainCharacter.character.y < 118 && mainCharacter.character.y > 100 &&
+                mainCharacter.character.x < 389 && mainCharacter.character.x > 358){
+                    scene.scene.start("HomeScene", {
+                        "message": "Go back home"
+                    });
+                }
         } else if (keyS.isDown) {
             mainCharacter.direction = 0;
             if (keyS.getDuration() > 1500 || mainCharacter.running) {
