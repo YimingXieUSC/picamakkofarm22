@@ -9,6 +9,7 @@ const MAIN_CHARACTER_SCALE = 1.5;
 const MAIN_CHARACTER_SIZE = 16;
 const allDirections = ['down', 'up', 'left', 'right'];
 
+/** Useful Classes **/
 class AnimatedObject {
     currentPlayingAnim;
     character;
@@ -16,8 +17,7 @@ class AnimatedObject {
         this.currentPlayingAnim = anim;
     }
 }
-
-class MainCharacer extends AnimatedObject {
+class MainCharacter extends AnimatedObject {
     disabledMoving = false;
     running = false;
     // direction: 0 (down), 1 (up), 2 (left), 3 (right)
@@ -35,12 +35,7 @@ var keyD;
 var keyX;
 var keyC;
 var keyV;
-var disabledMoving = false;
-var currentPlayingAnim = 'idle_down';
-const mainCharacter = new MainCharacer();
-var running = false;
-// direction: 0 (down), 1 (up), 2 (left), 3 (right)
-var direction = 0;
+const mainCharacter = new MainCharacter();
 
 /** Reused Functions **/
 function preloadAnimation(scene) {
