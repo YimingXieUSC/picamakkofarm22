@@ -70,6 +70,6 @@ var BeginGameScene = new Phaser.Class({
         this.physics.add.collider( mainCharacter.character, worldLayer2);
     },
     update: function() {
-        processInput();
+        processInput(this);
     }
 });

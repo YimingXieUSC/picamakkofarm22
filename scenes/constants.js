@@ -33,9 +33,11 @@ var keyX;
 var keyC;
 var keyV;
 const mainCharacter = new MainCharacter();
+var tilledSoils = [];
 
 /** Reused Functions **/
 function preloadAnimation(scene) {
+    scene.load.image('tilled_soil', 'assets/tilesets/tilled_soil.png');
     scene.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
     scene.load.spritesheet('normal_trees', 'assets/objects/Tree_animations/tree_sprites.png', { frameWidth: 48 });
     scene.load.spritesheet('pear_trees', 'assets/objects/Tree_animations/tree_pear_sprites.png', { frameWidth: 48 });
@@ -355,6 +357,7 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character.setScale(scale);
     mainCharacter.character.setSize(12, 10);
     mainCharacter.character.setOffset(18, 20);
+    mainCharacter.character.setDepth(5);
     mainCharacter.character.play(anim);
 
     scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
@@ -364,16 +367,39 @@ function spawnMainCharacter(scene, x, y, anim, scale)
 
 }
 
-function processInput()
+const xMax = 19 * 16;
+const xMax_right_facing_left = 20 * 16;
+const yMax = 13 * 16;
+const yMax_bottom_facing_up = 14 * 16;
+const xMin = 8 * 16;
+const xMin_left_facing_right = 7 * 16;
+const yMin = 5 * 16;
+const yMin_up_facing_down = 4 * 16;
+
+function tillSoil(scene, x, y) {
+    let xPos = x + 8;
+    let yPos = y + 8;
+    let soil = scene.add.image(xPos, yPos, 'tilled_soil');
+    tilledSoils.push(soil);
+    soil.setDepth(1);
+}
+
+function processInput(scene)
 {
     mainCharacter.character.setVelocity(0);
     if (!mainCharacter.disabledMoving) {
+        let xPos = (mainCharacter.character.x - 8 * 16) / 16;
+        let yPos = (mainCharacter.character.y - 5 * 16) / 16;
         // check for tilling
         if (keyX.isDown) {
             mainCharacter.disabledMoving = true;
             if (mainCharacter.direction == 1) {
                 mainCharacter.currentPlayingAnim = 'tilling_up';
                 mainCharacter.character.play('tilling_up');
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax_bottom_facing_up) {
+                    tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.floor(yPos - 1) + 5) * 16);
+                }
             } else if (mainCharacter.direction == 0) {
                 mainCharacter.currentPlayingAnim = 'tilling_down';
                 mainCharacter.character.play('tilling_down');
