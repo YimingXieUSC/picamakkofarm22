@@ -6,14 +6,6 @@ const main_character_anim_keys = [
     'chopping_down', 'chopping_up', 'chopping_left', 'chopping_right',
     'watering_down', 'watering_up', 'watering_left', 'watering_right',
 ];
-const WALKING_SPEED = 1;
-const RUNNING_SPEED = 3;
-const SCREEN_LEFT = 0;
-const SCREEN_RIGHT = 1280;
-const SCREEN_TOP = 0;
-const SCREEN_BOTTOM = 720;
-const MAIN_CHARACTER_SCALE = 2;
-const MAIN_CHARACTER_SIZE = 16;
 
 var keyW;
 var keyS;
