@@ -355,7 +355,7 @@ function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale, texture, col
 
 function spawnMainCharacter(scene, x, y, anim, scale)
 {
-    // scene.cameras.main.setBounds(0, 0, 1024, 2048);
+    scene.cameras.main.setBounds(0, 0, 1024, 2048);
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
@@ -364,9 +364,9 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character.setDepth(5);
     mainCharacter.character.play(anim);
 
-    // scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
+    scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
 
-    // scene.cameras.main.setZoom(2);
+    scene.cameras.main.setZoom(2);
 
 }
 
