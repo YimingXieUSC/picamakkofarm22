@@ -33,11 +33,15 @@ var keyX;
 var keyC;
 var keyV;
 const mainCharacter = new MainCharacter();
-var tilledSoils = [];
+var tilledSoilsX = [];
+var tilledSoilsY = [];
+var wateredSoilsX = [];
+var wateredSoilsY = [];
 
 /** Reused Functions **/
 function preloadAnimation(scene) {
     scene.load.image('tilled_soil', 'assets/tilesets/tilled_soil.png');
+    scene.load.image('watered_soil', 'assets/tilesets/water_soil.png');
     scene.load.spritesheet('main_character', 'assets/characters/main_character.png', { frameWidth: 48 });
     scene.load.spritesheet('normal_trees', 'assets/objects/Tree_animations/tree_sprites.png', { frameWidth: 48 });
     scene.load.spritesheet('pear_trees', 'assets/objects/Tree_animations/tree_pear_sprites.png', { frameWidth: 48 });
@@ -381,8 +385,25 @@ function tillSoil(scene, x, y) {
     let soil = scene.add.image(xPos, yPos, 'tilled_soil');
     scene.sound.play('collect_sound', {});
     scene.sound.pauseOnBlur = false;
-    tilledSoils.push(soil);
     soil.setDepth(1);
+    tilledSoilsX.push(xPos);
+    tilledSoilsY.push(yPos);
+}
+
+function waterSoil(scene, x, y) {
+    let xPos = x + 8;
+    let yPos = y + 8;
+    for (let i = 0; i < tilledSoilsX.length; i++) {
+        if (xPos === tilledSoilsX[i] && yPos === tilledSoilsY[i]) {
+            let soil = scene.add.image(xPos, yPos, 'watered_soil');
+            scene.sound.play('water_sound', {});
+            scene.sound.pauseOnBlur = false;
+            soil.setDepth(2);
+            wateredSoilsX.push(xPos);
+            wateredSoilsY.push(yPos);
+            return;
+        }
+    }
 }
 
 function processInput(scene)
@@ -394,28 +415,28 @@ function processInput(scene)
         // check for tilling
         if (keyX.isDown) {
             mainCharacter.disabledMoving = true;
-            if (mainCharacter.direction == 1) {
+            if (mainCharacter.direction === 1) {
                 mainCharacter.currentPlayingAnim = 'tilling_up';
                 mainCharacter.character.play('tilling_up');
                 if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
                   mainCharacter.character.y > yMin && mainCharacter.character.y < yMax_bottom_facing_up) {
                     tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.max(Math.floor(yPos - 1), 0) + 5) * 16);
                 }
-            } else if (mainCharacter.direction == 0) {
+            } else if (mainCharacter.direction === 0) {
                 mainCharacter.currentPlayingAnim = 'tilling_down';
                 mainCharacter.character.play('tilling_down');
                 if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
                   mainCharacter.character.y > yMin_up_facing_down && mainCharacter.character.y < yMax) {
                     tillSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.min(Math.floor(yPos + 1), 7) + 5) * 16);
                 }
-            } else if (mainCharacter.direction == 2) {
+            } else if (mainCharacter.direction === 2) {
                 mainCharacter.currentPlayingAnim = 'tilling_left';
                 mainCharacter.character.play('tilling_left');
                 if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax_right_facing_left &&
                   mainCharacter.character.y > yMin && mainCharacter.character.y < yMax) {
                     tillSoil(scene, (Math.max(Math.floor(xPos - 1), 0) + 8) * 16, (Math.round(yPos) + 5) * 16);
                 }
-            } else if (mainCharacter.direction == 3) {
+            } else if (mainCharacter.direction === 3) {
                 mainCharacter.currentPlayingAnim = 'tilling_right';
                 mainCharacter.character.play('tilling_right');
                 if (mainCharacter.character.x > xMin_left_facing_right && mainCharacter.character.x < xMax &&
@@ -428,36 +449,49 @@ function processInput(scene)
             });
             scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
-            if (mainCharacter.direction == 1) {
+            if (mainCharacter.direction === 1) {
                 mainCharacter.currentPlayingAnim = 'chopping_up';
                 mainCharacter.character.play('chopping_up');
-            } else if (mainCharacter.direction == 0) {
+            } else if (mainCharacter.direction === 0) {
                 mainCharacter.currentPlayingAnim = 'chopping_down';
                 mainCharacter.character.play('chopping_down');
-            } else if (mainCharacter.direction == 2) {
+            } else if (mainCharacter.direction === 2) {
                 mainCharacter.currentPlayingAnim = 'chopping_left';
                 mainCharacter.character.play('chopping_left');
-            } else if (mainCharacter.direction == 3) {
+            } else if (mainCharacter.direction === 3) {
                 mainCharacter.currentPlayingAnim = 'chopping_right';
                 mainCharacter.character.play('chopping_right');
             }
         } else if (keyV.isDown) {
-            scene.sound.play('water_sound', {
-            });
-            scene.sound.pauseOnBlur = false;
             mainCharacter.disabledMoving = true;
-            if (mainCharacter.direction == 1) {
+            if (mainCharacter.direction === 1) {
                 mainCharacter.currentPlayingAnim = 'watering_up';
                 mainCharacter.character.play('watering_up');
-            } else if (mainCharacter.direction == 0) {
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax_bottom_facing_up) {
+                    waterSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.max(Math.floor(yPos - 1), 0) + 5) * 16);
+                }
+            } else if (mainCharacter.direction === 0) {
                 mainCharacter.currentPlayingAnim = 'watering_down';
                 mainCharacter.character.play('watering_down');
-            } else if (mainCharacter.direction == 2) {
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin_up_facing_down && mainCharacter.character.y < yMax) {
+                    waterSoil(scene, (Math.floor(xPos) + 8) * 16, (Math.min(Math.floor(yPos + 1), 7) + 5) * 16);
+                }
+            } else if (mainCharacter.direction === 2) {
                 mainCharacter.currentPlayingAnim = 'watering_left';
                 mainCharacter.character.play('watering_left');
-            } else if (mainCharacter.direction == 3) {
+                if (mainCharacter.character.x > xMin && mainCharacter.character.x < xMax_right_facing_left &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax) {
+                    waterSoil(scene, (Math.max(Math.floor(xPos - 1), 0) + 8) * 16, (Math.round(yPos) + 5) * 16);
+                }
+            } else if (mainCharacter.direction === 3) {
                 mainCharacter.currentPlayingAnim = 'watering_right';
                 mainCharacter.character.play('watering_right');
+                if (mainCharacter.character.x > xMin_left_facing_right && mainCharacter.character.x < xMax &&
+                  mainCharacter.character.y > yMin && mainCharacter.character.y < yMax) {
+                    waterSoil(scene, (Math.min(Math.floor(xPos + 1), 10) + 8) * 16, (Math.round(yPos) + 5) * 16);
+                }
             }
         } else if (keyW.isDown) {
             mainCharacter.direction = 1;
