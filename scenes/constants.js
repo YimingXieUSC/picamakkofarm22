@@ -349,7 +349,7 @@ function spawnAnimatedObject(scene, x, y, anim, animatedObj, scale, texture, col
 
 function spawnMainCharacter(scene, x, y, anim, scale)
 {
-    scene.cameras.main.setBounds(0, 0, 1024, 2048);
+    // scene.cameras.main.setBounds(0, 0, 1024, 2048);
     mainCharacter.character = scene.physics.add.sprite(x, y, 'main_character');
     mainCharacter.character.setCollideWorldBounds(true);
     mainCharacter.character.setScale(scale);
@@ -357,10 +357,9 @@ function spawnMainCharacter(scene, x, y, anim, scale)
     mainCharacter.character.setOffset(18, 20);
     mainCharacter.character.play(anim);
 
-    scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
-        // this.cameras.main.roundPixels = true;
-    
-    scene.cameras.main.setZoom(2);
+    // scene.cameras.main.startFollow(mainCharacter.character, true, 0.09, 0.09);
+
+    // scene.cameras.main.setZoom(2);
 
 }
 
@@ -458,6 +457,18 @@ function processInput(scene)
                 }
                 mainCharacter.character.setVelocityY(WALKING_SPEED);
             }
+            if(mainCharacter.character.x > 258 && mainCharacter.character.x < 266  && mainCharacter.character.y > 353){
+                console.log("Go to region down");
+                scene.scene.start("GameOverScene", {
+                    "message": "Game over"
+                });
+            }
+            if(mainCharacter.character.x > 400  && mainCharacter.character.y > 353){
+                console.log("Go to region right");
+                scene.scene.start("GameOverScene", {
+                        "message": "Game over"
+            });
+            }
         } else if (keyA.isDown) {
             mainCharacter.direction = 2;
             if (keyA.getDuration() > 1500 || mainCharacter.running) {
@@ -475,6 +486,12 @@ function processInput(scene)
                 }
                 mainCharacter.character.setVelocityX(-WALKING_SPEED);
             }
+            if(mainCharacter.character.x < 14.5 && mainCharacter.character.y > 190 && mainCharacter.character.y < 200){
+                scene.scene.start("GameOverScene", {
+                    "message": "Game over"
+                });
+            }
+            
         } else if (keyD.isDown) {
             mainCharacter.direction = 3;
             if (keyD.getDuration() > 1500 || mainCharacter.running) {
@@ -491,6 +508,13 @@ function processInput(scene)
                     mainCharacter.character.play('walk_right');
                 }
                 mainCharacter.character.setVelocityX(WALKING_SPEED);
+            }
+            if(mainCharacter.character.x > 632){
+                console.log("go to right scene");
+                scene.scene.start("GameOverScene", {
+                    "message": "Game over"
+                });
+
             }
         } else {
             mainCharacter.running = false;
